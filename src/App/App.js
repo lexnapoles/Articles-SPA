@@ -1,11 +1,12 @@
 import React from 'react';
-import { articlesPropType } from './propTypes';
+import { articlesPropType } from '../propTypes';
+import ArticlesList from '../ArticlesList';
 
 const App = ({ articles }) =>
   <div >
     <header />
     <main >
-      <pre >{JSON.stringify(articles, null, 2)}</pre >
+      <ArticlesList articles={articles} />
     </main >
     <footer />
   </div >;
