@@ -1,0 +1,8 @@
+import React from 'react';
+import { shallow } from 'enzyme';
+import ArticlesList from './ArticlesList';
+
+it('renders without crashing', () => {
+  shallow(<ArticlesList articles={[]} />);
+});
+
