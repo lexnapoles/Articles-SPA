@@ -12,8 +12,13 @@
 
 .content {
     flex: 1;
-    width: 70%;
-    max-width: 84rem;
+    width: 90%;
+    max-width: 108rem;
 }
 
+@media screen and (min-width: 1000px) {
+    .content {
+        width: 70%;
+    }
+}
 

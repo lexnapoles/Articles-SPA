@@ -1,11 +1,33 @@
 .b-list {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
+    flex-flow: column wrap;
 }
 
 .b-list__item {
-    max-width: 32%;
-    flex: 1 1 32%;
-    margin-bottom: 1.33%;
+    flex: 1;
 }
+
+@media screen and (min-width: 800px) {
+    .b-list {
+        flex-flow: row wrap;
+        justify-content: space-between;
+    }
+
+    .b-list__item {
+        max-width: 48%;
+        flex: 1 1 48%;
+        margin-bottom: 2%;
+    }
+}
+
+@media screen and (min-width: 1300px) {
+    .b-list__item {
+        max-width: 32%;
+        flex: 1 1 32%;
+        margin-bottom: 1.33%;
+    }
+}
+
+
+
+
