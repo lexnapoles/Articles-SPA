@@ -1,14 +1,15 @@
 import React from 'react';
+import './app.css';
 import { articlesPropType } from '../propTypes';
-import ArticlesList from '../ArticlesList';
+import ArticlesList from '../articlesList/ArticlesList';
 
 const App = ({ articles }) =>
-  <div >
-    <header />
-    <main >
+  <div className="app" >
+    <header className="header" />
+    <main className="content" >
       <ArticlesList articles={articles} />
     </main >
-    <footer />
+    <footer className="footer" />
   </div >;
 
 App.propTypes = {

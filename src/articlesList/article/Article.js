@@ -1,11 +1,11 @@
 import React from 'react';
-import { singleArticlePropType } from './propTypes';
+import { singleArticlePropType } from '../../propTypes';
 
 const Article = article => {
   const { id, author, excerpt, title } = article;
 
   return (
-    <article key={id} >
+    <article key={id} className="b-list__item">
       <h1 >{title}</h1 >
       <h2 >{author}</h2 >
       <p >{excerpt}</p >

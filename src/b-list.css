@@ -1,0 +1,11 @@
+.b-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.b-list__item {
+    max-width: 32%;
+    flex: 1 1 32%;
+    margin-bottom: 1.33%;
+}
