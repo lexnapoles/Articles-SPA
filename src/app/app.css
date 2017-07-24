@@ -1,8 +1,44 @@
+body {
+    font-family: 'Merriweather', serif;
+    background-color: white;
+    line-height: 1.45;
+    color: #333;
+}
+
+h1, h2, h3, h4 {
+    font-family: 'Lato', sans-serif;
+    line-height: 1.2;
+}
+
+/* Major Second scale*/
+
+h1 {
+    font-size: 1.602em;
+    font-weight: 700;
+}
+
+h2, h3, h4 {
+    font-weight: 400;
+}
+
+h2 {
+    font-size: 1.424em;
+}
+
+h3 {
+    font-size: 1.266em;
+}
+
+h4 {
+    font-size: 1.125em;
+}
+
 .app {
     display: flex;
     min-height: 100vh;
     flex-direction: column;
     align-items: center;
+    background: #E7E7E7;
 }
 
 .header, .footer {
@@ -21,4 +57,3 @@
         width: 70%;
     }
 }
-
