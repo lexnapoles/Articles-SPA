@@ -1,6 +1,7 @@
 import {
   GraphQLBoolean,
   GraphQLObjectType,
+  GraphQLNonNull,
   GraphQLString,
   GraphQLList,
   GraphQLSchema,
@@ -39,6 +40,18 @@ const Query = new GraphQLObjectType({
   name: 'Query',
   description: 'This is a root query',
   fields: () => ({
+    article: {
+      type: articleType,
+      args: {
+        id: {
+          type: new GraphQLNonNull(GraphQLString),
+          description: 'The id of the article',
+        },
+      },
+      resolve(_, { id }) {
+        return db.Article.findById(id);
+      },
+    },
     articles: {
       type: new GraphQLList(articleType),
       resolve() {
