@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Article from './Article';
+import ArticleOverview from './ArticleOverview';
 
 it('renders without crashing', () => {
   const article = {
@@ -12,5 +12,6 @@ it('renders without crashing', () => {
 
   const div = document.createElement('div');
 
-  ReactDOM.render(<Article article={article} />, div);
+  ReactDOM.render(<ArticleOverview article={article} />, div);
 });
+

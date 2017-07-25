@@ -1,11 +1,11 @@
 import React from 'react';
 import { articlesPropType } from '../propTypes';
-import Article from './article/Article';
+import ArticleOverview from './articleOverview/ArticleOverview';
 import '../b-list.css';
 
 const ArticlesList = ({ articles }) => (
-  <div className="b-list">
-    {articles.map(Article)}
+  <div className="b-list" >
+    {articles.map(ArticleOverview)}
   </div >
 );
 
