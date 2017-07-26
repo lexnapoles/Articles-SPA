@@ -14,4 +14,3 @@ it('renders without crashing', () => {
 
   ReactDOM.render(<ArticleOverview article={article} />, div);
 });
-
