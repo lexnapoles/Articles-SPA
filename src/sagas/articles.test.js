@@ -1,7 +1,15 @@
-import { call, put } from 'redux-saga/effects';
-import { fetchArticles } from './articles';
+import { call, put, takeEvery } from 'redux-saga/effects';
+import { watchFetchArticles, fetchArticles } from './articles';
 import * as Api from '../api/api';
 import { FETCH_ARTICLES } from '../constants/actionTypes';
+
+it('creates a new fetchArticles task on each FETCH_ARTICLES_REQUEST action', () => {
+  const iterator = watchFetchArticles();
+
+  const spawnFetchArticlesOnEachRequest = iterator.next().value;
+
+  expect(spawnFetchArticlesOnEachRequest).toEqual(takeEvery(FETCH_ARTICLES.REQUEST, fetchArticles));
+});
 
 it('calls the fetch articles service', () => {
   const iterator = fetchArticles();
