@@ -11,12 +11,13 @@ it('calls the fetch articles service', () => {
   expect(callFetchArticlesService).toEqual(call(Api.fetchArticles));
 });
 
-it('dispatches a FETCH_ARTICLES_SUCCESS action when the articles are received', () => {
+it('dispatches a FETCH_ARTICLES_SUCCESS action with the articles when the articles are received', () => {
   const iterator = fetchArticles();
 
   iterator.next();
 
-  const dispatchSuccessAction = iterator.next().value;
+  const payload = {};
+  const dispatchSuccessAction = iterator.next(payload).value;
 
-  expect(dispatchSuccessAction).toEqual(put({ type: FETCH_ARTICLES.SUCCESS }));
+  expect(dispatchSuccessAction).toEqual(put({ type: FETCH_ARTICLES.SUCCESS, payload }));
 });
