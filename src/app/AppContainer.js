@@ -1,13 +1,8 @@
 import React, { Component } from 'react';
-import request from '../request';
-import { ARTICLES_QUERY } from '../queries';
 import App from './App';
+import fetchArticles from '../api/fetchArticles';
 
 class AppContainer extends Component {
-  static getArticles({ data: { articles } }) {
-    return articles;
-  }
-
   // definition
   constructor(props) {
     super(props);
@@ -18,8 +13,7 @@ class AppContainer extends Component {
 
   // lifecycle
   componentWillMount() {
-    request(ARTICLES_QUERY)
-      .then(AppContainer.getArticles)
+    fetchArticles()
       .then(articles => this.setState({ articles }));
   }
 
