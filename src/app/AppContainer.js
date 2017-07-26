@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import App from './App';
-import fetchArticles from '../api/fetchArticles';
+import { fetchArticles } from '../api/api';
 
 class AppContainer extends Component {
   // definition
