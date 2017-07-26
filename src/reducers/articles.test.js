@@ -6,11 +6,15 @@ it('adds the fetched articles to the store', () => {
     type: FETCH_ARTICLES.SUCCESS,
     payload: {
       entities: {
-        '5978b81ed092522a4c85a481': {
-          id: '5978b81ed092522a4c85a481',
+        articles: {
+          '5978b81ed092522a4c85a481': {
+            id: '5978b81ed092522a4c85a481',
+          },
         },
       },
-      result: ['5978b81ed092522a4c85a481'],
+      result: {
+        articles: ['5978b81ed092522a4c85a481'],
+      },
     },
   };
 
