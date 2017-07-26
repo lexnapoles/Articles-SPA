@@ -6,7 +6,11 @@
     "axios": "^0.16.1",
     "normalize.css": "^7.0.0",
     "react": "^15.5.4",
-    "react-dom": "^15.5.4"
+    "react-dom": "^15.5.4",
+    "react-redux": "^5.0.5",
+    "redux": "^3.7.2",
+    "redux-devtools-extension": "^2.13.2",
+    "redux-saga": "^0.15.6"
   },
   "devDependencies": {
     "babel-eslint": "^7.2.3",
