@@ -5,3 +5,4 @@ const asyncActionTypes = actionName => ({
 });
 
 export const FETCH_ARTICLES = asyncActionTypes('FETCH_ARTICLES');
+export const FETCH_ARTICLE_BY_ID = asyncActionTypes('FETCH_ARTICLE_BY_ID');
