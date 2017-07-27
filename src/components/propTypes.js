@@ -10,11 +10,13 @@ const singleArticleOverviewPropType = PropTypes.shape({
 export const articleOverviewPropType = {
   article: singleArticleOverviewPropType,
   onClick: PropTypes.func.isRequired,
+  onDelete: PropTypes.func.isRequired,
 };
 
 export const articlesListPropType = {
   articles: PropTypes.arrayOf(singleArticleOverviewPropType),
   onClick: PropTypes.func.isRequired,
+  onDelete: PropTypes.func.isRequired,
 };
 
 export const singleArticlePropType = PropTypes.shape({

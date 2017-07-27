@@ -7,9 +7,14 @@ import { hasAllFields } from '../utils';
 // Workers
 
 export const deleteArticle = function* (id) {
-  const payload = yield call(Api.deleteArticle, id);
+  const articleId = yield call(Api.deleteArticle, id);
 
-  yield put({ type: DELETE_ARTICLE.SUCCESS, payload });
+  yield put({
+    type: DELETE_ARTICLE.SUCCESS,
+    payload: {
+      id: articleId,
+    },
+  });
 };
 
 export const fetchArticles = function* () {

@@ -18,10 +18,10 @@ export const ARTICLE_BY_ID_QUERY = id => `{
   }
 }`;
 
-export const DELETE_ARTICLE_QUERY = id =>
-  `mutation delete {
-    deleteArticle(article: {
-      id: ${id}
-    })
-  }
-`;
+
+export const DELETE_ARTICLE_QUERY = id => `
+mutation {
+  deleteArticle(article: {
+    id: "${id}"
+  })
+}`;

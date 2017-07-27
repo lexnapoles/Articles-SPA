@@ -139,7 +139,7 @@ describe('deleteArticle', () => {
 
     const dispatchSuccessAction = iterator.next(id).value;
 
-    expect(dispatchSuccessAction).toEqual(put({ type: DELETE_ARTICLE.SUCCESS, payload: id }));
+    expect(dispatchSuccessAction).toEqual(put({ type: DELETE_ARTICLE.SUCCESS, payload: { id } }));
   });
 });
 
