@@ -3,5 +3,5 @@ import { shallow } from 'enzyme';
 import AppContainer from './AppContainer';
 
 it('renders without crashing', () => {
-  shallow(<AppContainer fetchArticles={() => ({})} />);
+  shallow(<AppContainer fetchArticles={() => undefined} />);
 });

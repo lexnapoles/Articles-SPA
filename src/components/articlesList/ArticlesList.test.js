@@ -3,6 +3,6 @@ import { shallow } from 'enzyme';
 import ArticlesList from './ArticlesList';
 
 it('renders without crashing', () => {
-  shallow(<ArticlesList articles={[]} />);
+  shallow(<ArticlesList articles={[]} onClick={() => undefined} />);
 });
 

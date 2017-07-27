@@ -1,11 +1,11 @@
 import React from 'react';
-import { singleArticleOverviewPropType } from '../../propTypes';
+import { articleOverviewPropType } from '../../propTypes';
 
-const ArticleOverview = article => {
-  const { id, author, excerpt, title } = article;
+const ArticleOverview = ({ article, onClick }) => {
+  const { author, excerpt, title } = article;
 
   return (
-    <article key={id} className="b-list__item" >
+    <article className="b-list__item" onClick={onClick} >
       <h1 >{title}</h1 >
       <h2 >{author}</h2 >
       <p >{excerpt}</p >
@@ -13,8 +13,6 @@ const ArticleOverview = article => {
   );
 };
 
-ArticleOverview.propTypes = {
-  article: singleArticleOverviewPropType,
-};
+ArticleOverview.propTypes = articleOverviewPropType;
 
 export default ArticleOverview;

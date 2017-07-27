@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { shallow } from 'enzyme';
 import ArticleOverview from './ArticleOverview';
 
 it('renders without crashing', () => {
@@ -10,7 +10,5 @@ it('renders without crashing', () => {
     excerpt: 'excerpt',
   };
 
-  const div = document.createElement('div');
-
-  ReactDOM.render(<ArticleOverview article={article} />, div);
+  shallow(<ArticleOverview article={article} onClick={() => undefined} />);
 });
