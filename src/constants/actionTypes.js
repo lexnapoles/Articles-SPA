@@ -7,4 +7,6 @@ const asyncActionTypes = actionName => ({
 export const FETCH_ARTICLES = asyncActionTypes('FETCH_ARTICLES');
 export const FETCH_ARTICLE_BY_ID = asyncActionTypes('FETCH_ARTICLE_BY_ID');
 
+export const DELETE_ARTICLE = asyncActionTypes('DELETE_ARTICLE');
+
 export const LOAD_ARTICLE = 'LOAD_ARTICLE';

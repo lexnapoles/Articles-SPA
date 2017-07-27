@@ -1,7 +1,10 @@
 import { call, put, takeEvery, fork } from 'redux-saga/effects';
-import { watchFetchArticles, fetchArticles, fetchArticleById, loadArticle, watchLoadArticle } from './articles';
+import {
+  watchFetchArticles, fetchArticles, fetchArticleById, loadArticle, watchLoadArticle,
+  deleteArticle,
+} from './articles';
 import * as Api from '../api/api';
-import { FETCH_ARTICLE_BY_ID, FETCH_ARTICLES, LOAD_ARTICLE } from '../constants/actionTypes';
+import { DELETE_ARTICLE, FETCH_ARTICLE_BY_ID, FETCH_ARTICLES, LOAD_ARTICLE } from '../constants/actionTypes';
 
 describe('fetchArticles', () => {
   it('calls the fetch articles service', () => {
@@ -115,5 +118,27 @@ describe('watchLoadArticle', () => {
     const spawnLoadArticle = iterator.next(action).value;
 
     expect(spawnLoadArticle).toEqual(fork(loadArticle, id, requiredFields));
+  });
+});
+
+describe('deleteArticle', () => {
+  it('calls the delete article service', () => {
+    const id = '5978b81ed092522a4c85a481';
+    const iterator = deleteArticle(id);
+
+    const callDeleteService = iterator.next().value;
+
+    expect(callDeleteService).toEqual(call(Api.deleteArticle, id));
+  });
+
+  it('dispatches the DELETE_ARTICLE_SUCCESS when the article has been deleted', () => {
+    const id = '5978b81ed092522a4c85a481';
+    const iterator = deleteArticle(id);
+
+    iterator.next();
+
+    const dispatchSuccessAction = iterator.next(id).value;
+
+    expect(dispatchSuccessAction).toEqual(put({ type: DELETE_ARTICLE.SUCCESS, payload: id }));
   });
 });

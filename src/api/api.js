@@ -1,5 +1,5 @@
 import request from '../api/request';
-import { ARTICLE_BY_ID_QUERY, ARTICLES_QUERY } from './queries';
+import { ARTICLE_BY_ID_QUERY, ARTICLES_QUERY, DELETE_ARTICLE_QUERY } from './queries';
 import { normalizeArticles } from './schema';
 
 export const fetchArticles = () =>
@@ -9,3 +9,7 @@ export const fetchArticles = () =>
 export const fetchArticleById = id =>
   request(ARTICLE_BY_ID_QUERY(id))
     .then(({ data }) => data.article);
+
+export const deleteArticle = id =>
+  request(DELETE_ARTICLE_QUERY(id))
+    .then(({ data }) => data.deleteArticle);

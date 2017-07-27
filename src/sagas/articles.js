@@ -1,10 +1,16 @@
 import { call, put, takeEvery, select, take, fork } from 'redux-saga/effects';
 import * as Api from '../api/api';
-import { FETCH_ARTICLE_BY_ID, FETCH_ARTICLES, LOAD_ARTICLE } from '../constants/actionTypes';
+import { DELETE_ARTICLE, FETCH_ARTICLE_BY_ID, FETCH_ARTICLES, LOAD_ARTICLE } from '../constants/actionTypes';
 import { getArticleById } from '../selectors/articles';
 import { hasAllFields } from '../utils';
 
-//Workers
+// Workers
+
+export const deleteArticle = function* (id) {
+  const payload = yield call(Api.deleteArticle, id);
+
+  yield put({ type: DELETE_ARTICLE.SUCCESS, payload });
+};
 
 export const fetchArticles = function* () {
   const payload = yield call(Api.fetchArticles);
@@ -19,7 +25,7 @@ export const fetchArticleById = function* (id) {
   yield put({ type: FETCH_ARTICLE_BY_ID.SUCCESS, payload });
 };
 
-//Loaders
+// Loaders
 
 export const loadArticle = function* (id, requiredFields) {
   const article = yield select(getArticleById, id);
@@ -31,7 +37,7 @@ export const loadArticle = function* (id, requiredFields) {
   }
 };
 
-//Watchers
+// Watchers
 
 export const watchFetchArticles = function* () {
   yield takeEvery(FETCH_ARTICLES.REQUEST, fetchArticles);
