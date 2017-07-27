@@ -1,7 +1,7 @@
 import { call, put, takeEvery, fork } from 'redux-saga/effects';
 import {
   watchFetchArticles, fetchArticles, fetchArticleById, loadArticle, watchLoadArticle,
-  deleteArticle,
+  deleteArticle, watchDeleteArticle,
 } from './articles';
 import * as Api from '../api/api';
 import { DELETE_ARTICLE, FETCH_ARTICLE_BY_ID, FETCH_ARTICLES, LOAD_ARTICLE } from '../constants/actionTypes';
@@ -140,5 +140,25 @@ describe('deleteArticle', () => {
     const dispatchSuccessAction = iterator.next(id).value;
 
     expect(dispatchSuccessAction).toEqual(put({ type: DELETE_ARTICLE.SUCCESS, payload: id }));
+  });
+});
+
+describe('watchDeleteArticle', () => {
+  it('spawns a new deleteArticle worker every DELETE_ARTICLE_REQUEST action', () => {
+    const iterator = watchDeleteArticle();
+
+    iterator.next();
+
+    const id = '5978b81ed092522a4c85a481';
+    const action = {
+      type: DELETE_ARTICLE.REQUEST,
+      payload: {
+        id,
+      },
+    };
+
+    const spawnDeleteArticle = iterator.next(action).value;
+
+    expect(spawnDeleteArticle).toEqual(fork(deleteArticle, id));
   });
 });

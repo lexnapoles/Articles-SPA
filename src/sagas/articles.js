@@ -43,6 +43,14 @@ export const watchFetchArticles = function* () {
   yield takeEvery(FETCH_ARTICLES.REQUEST, fetchArticles);
 };
 
+export const watchDeleteArticle = function* () {
+  while (true) {
+    const { payload } = yield take(DELETE_ARTICLE.REQUEST);
+
+    yield fork(deleteArticle, payload.id);
+  }
+};
+
 export const watchLoadArticle = function* () {
   while (true) {
     const {
