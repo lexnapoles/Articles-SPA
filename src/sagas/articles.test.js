@@ -1,5 +1,5 @@
-import { call, put, takeEvery } from 'redux-saga/effects';
-import { watchFetchArticles, fetchArticles, fetchArticleById } from './articles';
+import { call, put, takeEvery, takeLatest } from 'redux-saga/effects';
+import { watchFetchArticles, fetchArticles, fetchArticleById, watchFetchArticleById } from './articles';
 import * as Api from '../api/api';
 import { FETCH_ARTICLE_BY_ID, FETCH_ARTICLES } from '../constants/actionTypes';
 
@@ -36,7 +36,11 @@ describe('watchFetchArticles', () => {
 
   describe('fetchArticleById', () => {
     it('calls the fetch articles by id service', () => {
-      const iterator = fetchArticleById('5978b81ed092522a4c85a481');
+      const action = {
+        payload: '5978b81ed092522a4c85a481',
+      };
+
+      const iterator = fetchArticleById(action);
 
       const callFetchArticleByIdService = iterator.next().value;
 
@@ -45,7 +49,11 @@ describe('watchFetchArticles', () => {
   });
 
   it('dispatches a FETCH_ARTICLE_BY_ID_SUCCESS action with the article when the article is received', () => {
-    const iterator = fetchArticleById();
+    const action = {
+      payload: '5978b81ed092522a4c85a481',
+    };
+
+    const iterator = fetchArticleById(action);
 
     iterator.next();
 
@@ -55,3 +63,14 @@ describe('watchFetchArticles', () => {
     expect(dispatchSuccessAction).toEqual(put({ type: FETCH_ARTICLE_BY_ID.SUCCESS, payload }));
   });
 });
+
+describe('watchFetchArticleById', () => {
+  it('creates a fetchArticleById task on FETCH_ARTICLES_BY_ID_REQUEST action', () => {
+    const iterator = watchFetchArticleById();
+
+    const fetchArticleByIdTask = iterator.next().value;
+
+    expect(fetchArticleByIdTask).toEqual(takeLatest(FETCH_ARTICLE_BY_ID.REQUEST, fetchArticleById));
+  });
+});
+
