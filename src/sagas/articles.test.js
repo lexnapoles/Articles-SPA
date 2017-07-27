@@ -1,7 +1,7 @@
-import { call, put, takeEvery } from 'redux-saga/effects';
-import { watchFetchArticles, fetchArticles, fetchArticleById, loadArticle } from './articles';
+import { call, put, takeEvery, fork } from 'redux-saga/effects';
+import { watchFetchArticles, fetchArticles, fetchArticleById, loadArticle, watchLoadArticle } from './articles';
 import * as Api from '../api/api';
-import { FETCH_ARTICLE_BY_ID, FETCH_ARTICLES } from '../constants/actionTypes';
+import { FETCH_ARTICLE_BY_ID, FETCH_ARTICLES, LOAD_ARTICLE } from '../constants/actionTypes';
 
 describe('fetchArticles', () => {
   it('calls the fetch articles service', () => {
@@ -93,5 +93,27 @@ describe('loadArticle', () => {
     const fetchArticle = iterator.next(article).value;
 
     expect(fetchArticle).toEqual(undefined);
+  });
+});
+
+describe('watchLoadArticle', () => {
+  it('spawns a new loadArticle worker every LOAD_ARTICLE action', () => {
+    const iterator = watchLoadArticle();
+
+    iterator.next();
+
+    const id = '5978b81ed092522a4c85a481';
+    const requiredFields = ['author', 'content', 'published', 'tags', 'title'];
+    const action = {
+      type: LOAD_ARTICLE,
+      payload: {
+        id,
+        requiredFields,
+      },
+    };
+
+    const spawnLoadArticle = iterator.next(action).value;
+
+    expect(spawnLoadArticle).toEqual(fork(loadArticle, id, requiredFields));
   });
 });
