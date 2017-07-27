@@ -1,5 +1,5 @@
-import { call, put, takeEvery, takeLatest } from 'redux-saga/effects';
-import { watchFetchArticles, fetchArticles, fetchArticleById, watchFetchArticleById } from './articles';
+import { call, put, takeEvery } from 'redux-saga/effects';
+import { watchFetchArticles, fetchArticles, fetchArticleById, loadArticle } from './articles';
 import * as Api from '../api/api';
 import { FETCH_ARTICLE_BY_ID, FETCH_ARTICLES } from '../constants/actionTypes';
 
@@ -36,11 +36,7 @@ describe('watchFetchArticles', () => {
 
   describe('fetchArticleById', () => {
     it('calls the fetch articles by id service', () => {
-      const action = {
-        payload: '5978b81ed092522a4c85a481',
-      };
-
-      const iterator = fetchArticleById(action);
+      const iterator = fetchArticleById('5978b81ed092522a4c85a481');
 
       const callFetchArticleByIdService = iterator.next().value;
 
@@ -64,13 +60,38 @@ describe('watchFetchArticles', () => {
   });
 });
 
-describe('watchFetchArticleById', () => {
-  it('creates a fetchArticleById task on FETCH_ARTICLES_BY_ID_REQUEST action', () => {
-    const iterator = watchFetchArticleById();
+describe('loadArticle', () => {
+  it('fetches the article if it is not cached', () => {
+    const ARTICLE_REQUIRED = '5978b81ed092522a4c85a481';
+    const requiredFields = ['author', 'content', 'published', 'tags', 'title'];
+    const iterator = loadArticle(ARTICLE_REQUIRED, requiredFields);
+    const article = undefined;
 
-    const fetchArticleByIdTask = iterator.next().value;
+    iterator.next();
 
-    expect(fetchArticleByIdTask).toEqual(takeLatest(FETCH_ARTICLE_BY_ID.REQUEST, fetchArticleById));
+    const fetchArticle = iterator.next(article).value;
+
+    expect(fetchArticle).toEqual(call(fetchArticleById, ARTICLE_REQUIRED));
+  });
+
+  it('does not fetched the article if it is cached', () => {
+    const ARTICLE_REQUIRED = '5978b81ed092522a4c85a481';
+    const requiredFields = ['author', 'content', 'published', 'tags', 'title'];
+    const iterator = loadArticle(ARTICLE_REQUIRED, requiredFields);
+
+    const article = {
+      id: '5978b81ed092522a4c85a481',
+      author: 'Author',
+      content: 'Content',
+      published: true,
+      tags: ['Tag'],
+      title: 'Title',
+    };
+
+    iterator.next();
+
+    const fetchArticle = iterator.next(article).value;
+
+    expect(fetchArticle).toEqual(undefined);
   });
 });
-
