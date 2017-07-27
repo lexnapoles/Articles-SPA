@@ -3,12 +3,13 @@ import { singleArticlePropType } from '../propTypes';
 import './b-article.css';
 
 class Article extends Component {
-  static renderArticle({ author, content, title }) {
+  static renderArticle({ author, content, title, tags }) {
     return (
       <article className="b-article" >
         <h1 >{title}</h1 >
         <h2 >{author}</h2 >
-        <p className="b-article__content">{content}</p >
+        <p className="b-article__content" >{content}</p >
+        {tags.map(tag => <span key={tag} className="b-article__tag" >{tag}</span >)}
       </article >
     );
   }
