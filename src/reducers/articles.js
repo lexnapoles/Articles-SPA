@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
-import { merge } from 'lodash/object';
+import { merge, omit } from 'lodash/object';
 import { union } from 'lodash/array';
-import { FETCH_ARTICLE_BY_ID, FETCH_ARTICLES } from '../constants/actionTypes';
+import { DELETE_ARTICLE, FETCH_ARTICLE_BY_ID, FETCH_ARTICLES } from '../constants/actionTypes';
 
 const byId = (state = {}, action) => {
   switch (action.type) {
@@ -17,6 +17,12 @@ const byId = (state = {}, action) => {
       const { articles } = action.payload.entities;
 
       return merge(state, articles);
+    }
+
+    case DELETE_ARTICLE.SUCCESS: {
+      const { id } = action.payload;
+
+      return omit(state, id);
     }
 
     default:
@@ -36,6 +42,12 @@ const allIds = (state = [], action) => {
       const { articles } = action.payload.result;
 
       return union(state, articles);
+    }
+
+    case DELETE_ARTICLE.SUCCESS: {
+      const { id } = action.payload;
+
+      return state.filter(articleId => articleId !== id);
     }
 
     default:
