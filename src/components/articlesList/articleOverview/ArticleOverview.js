@@ -1,5 +1,5 @@
 import React from 'react';
-import { singleArticlePropType } from '../../propTypes';
+import { singleArticleOverviewPropType } from '../../propTypes';
 
 const ArticleOverview = article => {
   const { id, author, excerpt, title } = article;
@@ -14,7 +14,7 @@ const ArticleOverview = article => {
 };
 
 ArticleOverview.propTypes = {
-  article: singleArticlePropType,
+  article: singleArticleOverviewPropType,
 };
 
 export default ArticleOverview;

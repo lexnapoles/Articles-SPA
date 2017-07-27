@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import './app.css';
 import ConnectedArticlesList from '../articlesList/ConnectedArticlesList';
-import Article from '../article/Article';
+import ConnectedArticle from '../article/ConnectedArticle';
 
 const App = () =>
   <div className="app" >
@@ -11,7 +11,7 @@ const App = () =>
       <BrowserRouter >
         <Switch >
           <Route exact path="/" component={ConnectedArticlesList} />
-          <Route path="/:id" component={Article} />
+          <Route path="/:id" component={ConnectedArticle} />
         </Switch >
       </BrowserRouter >
     </main >
