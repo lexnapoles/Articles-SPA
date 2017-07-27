@@ -1,6 +1,6 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
 import * as Api from '../api/api';
-import { FETCH_ARTICLES } from '../constants/actionTypes';
+import { FETCH_ARTICLE_BY_ID, FETCH_ARTICLES } from '../constants/actionTypes';
 
 export const fetchArticles = function* () {
   const payload = yield call(Api.fetchArticles);
@@ -10,4 +10,10 @@ export const fetchArticles = function* () {
 
 export const watchFetchArticles = function* () {
   yield takeEvery(FETCH_ARTICLES.REQUEST, fetchArticles);
+};
+
+export const fetchArticleById = function* (id) {
+  const payload = yield call(Api.fetchArticleById, id);
+
+  yield put({ type: FETCH_ARTICLE_BY_ID.SUCCESS, payload });
 };
