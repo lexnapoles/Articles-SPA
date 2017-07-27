@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import { singleArticlePropType } from '../propTypes';
+import './b-article.css';
 
 class Article extends Component {
   static renderArticle({ author, content, title }) {
     return (
-      <article >
+      <article className="b-article" >
         <h1 >{title}</h1 >
         <h2 >{author}</h2 >
-        <p >{content}</p >
+        <p className="b-article__content">{content}</p >
       </article >
     );
   }

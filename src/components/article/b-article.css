@@ -1,0 +1,9 @@
+.b-article {
+    max-width: 40rem;
+    margin: 0 auto;
+}
+
+.b-article__content {
+    line-height: 1.618;
+}
+
