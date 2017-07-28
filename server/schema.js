@@ -62,6 +62,27 @@ const Query = new GraphQLObjectType({
   }),
 });
 
+const addArticleInputType = new GraphQLInputObjectType({
+  name: 'AddArticleInput',
+  fields: () => ({
+    author: {
+      type: GraphQLString,
+    },
+    content: {
+      type: GraphQLString,
+    },
+    excerpt: {
+      type: GraphQLString,
+    },
+    tags: {
+      type: new GraphQLList(GraphQLString),
+    },
+    title: {
+      type: GraphQLString,
+    },
+  }),
+});
+
 const deleteArticleInputType = new GraphQLInputObjectType({
   name: 'DeleteArticleInput',
   fields: () => ({
@@ -76,6 +97,19 @@ const Mutation = new GraphQLObjectType({
   name: 'Mutation',
   description: 'This is a root mutation',
   fields: () => ({
+    addArticle: {
+      type: articleType,
+      args: {
+        article: {
+          type: new GraphQLNonNull(addArticleInputType),
+        },
+      },
+      resolve(_, { article }) {
+        const newArticle = new db.Article({ ...article, published: false });
+
+        return newArticle.save();
+      },
+    },
     deleteArticle: {
       type: GraphQLString,
       args: {
