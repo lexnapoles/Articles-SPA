@@ -160,7 +160,7 @@ const Mutation = new GraphQLObjectType({
           excerpt: getExcerpt(article),
         };
 
-        return db.Article.findByIdAndUpdate(article.id, updatedArticle);
+        return db.Article.findByIdAndUpdate(article.id, updatedArticle, { new: true });
       },
     },
   }),

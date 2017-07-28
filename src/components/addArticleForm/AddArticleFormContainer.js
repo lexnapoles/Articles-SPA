@@ -13,8 +13,8 @@ class AddArticleFormContainer extends Component {
   }
 
   static validateTags(tags) {
-    // Tags Format: tag1;tag2;tag3 || tag1
-    const tagsFormat = /^((\w+;)+)?\w+$/ig;
+    // Tags Format: a super-co`ol tag 1;tag2;tag3 || tag1
+    const tagsFormat = /^(([\S]+[^\s];)+)?((([ \S])+)[^\s;])$/ig;
 
     const invalidTagFormat = !tags.match(tagsFormat);
 

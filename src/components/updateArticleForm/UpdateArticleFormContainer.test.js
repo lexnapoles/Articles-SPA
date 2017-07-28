@@ -6,12 +6,14 @@ it('renders without crashing', () => {
   const article = {
     author: '',
     content: '',
-    tags: '',
+    tags: [''],
     title: '',
     published: false,
   };
 
-  shallow(<UpdateArticleFormContainer article={article} onSubmit={() => undefined} />);
+  const placeholderFn = () => undefined;
+
+  shallow(<UpdateArticleFormContainer article={article} onSubmit={placeholderFn} loadArticle={placeholderFn} id="" />);
 });
 
 it('validates the article', () => {

@@ -61,12 +61,15 @@ export const articleFormPropType = {
 
 const updateArticlePropTypeShape = PropTypes.shape({
   ...formPropType,
+  tags: PropTypes.arrayOf(PropTypes.string).isRequired,
   published: PropTypes.bool.isRequired,
 });
 
 export const updateFormPropType = {
   article: updateArticlePropTypeShape,
   onSubmit: PropTypes.func.isRequired,
+  id: PropTypes.string.isRequired,
+  loadArticle: PropTypes.func.isRequired,
 };
 
 export const inputPropType = {

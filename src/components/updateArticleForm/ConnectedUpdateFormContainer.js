@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import UpdateArticleFormContainer from './UpdateArticleFormContainer';
-import { updateArticle } from '../../actions/articles';
+import { loadArticle, updateArticle } from '../../actions/articles';
 import { getArticleById } from '../../selectors/articles';
 import { hasAllFields } from '../../../utils';
 
@@ -16,6 +16,7 @@ const mapDispatchToProps = (dispatch, { history }) => {
 
   return {
     onSubmit,
+    loadArticle: (id, requiredFields) => dispatch(loadArticle(id, requiredFields)),
   };
 };
 
@@ -28,6 +29,7 @@ const mapStateToProps = (state, { match }) => {
 
   return {
     article: hasAllArticleKeys ? article : null,
+    id,
   };
 };
 

@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import { isEqual } from 'lodash/lang';
+import { pick } from 'lodash/object';
 import UpdateArticleForm from './UpdateArticleForm';
 import { updateFormPropType } from '../propTypes';
 
 // TODO: Refactor forms into a single Form HOC
+
+const requiredFields = ['id', 'author', 'content', 'published', 'tags', 'title'];
 
 class UpdateArticleFormContainer extends Component {
   static validateInput(value) {
@@ -15,8 +18,8 @@ class UpdateArticleFormContainer extends Component {
   }
 
   static validateTags(tags) {
-    // Tags Format: tag1;tag2;tag3 || tag1
-    const tagsFormat = /^((\w+;)+)?\w+$/ig;
+    // Tags Format: a super-co`ol tag 1;tag2;tag3 || tag1
+    const tagsFormat = /^(([\S]+[^\s];)+)?((([ \S])+)[^\s;])$/ig;
 
     const invalidTagFormat = !tags.match(tagsFormat);
 
@@ -73,13 +76,22 @@ class UpdateArticleFormContainer extends Component {
     this.onSubmit = this.onSubmit.bind(this);
   }
 
+  componentWillMount() {
+    const { loadArticle, id } = this.props;
+
+    loadArticle(id, requiredFields);
+  }
+
   componentWillReceiveProps({ article }) {
     const isNotAnEmptyArticle = Object.keys(article).length;
     const isNotTheSameArticle = !isEqual(this.state.article, article);
 
     if (isNotAnEmptyArticle && isNotTheSameArticle) {
       this.setState({
-        article,
+        article: {
+          ...pick(article, requiredFields),
+          tags: article.tags.join(';'),
+        },
       });
     }
   }
@@ -131,7 +143,6 @@ class UpdateArticleFormContainer extends Component {
       />);
   }
 }
-
 
 UpdateArticleFormContainer.propTypes = updateFormPropType;
 

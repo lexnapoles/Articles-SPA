@@ -1,7 +1,10 @@
 import { combineReducers } from 'redux';
 import { merge, omit } from 'lodash/object';
 import { union } from 'lodash/array';
-import { ADD_ARTICLE, DELETE_ARTICLE, FETCH_ARTICLE_BY_ID, FETCH_ARTICLES } from '../constants/actionTypes';
+import {
+  ADD_ARTICLE, DELETE_ARTICLE, FETCH_ARTICLE_BY_ID, FETCH_ARTICLES,
+  UPDATE_ARTICLE,
+} from '../constants/actionTypes';
 
 const byId = (state = {}, action) => {
   switch (action.type) {
@@ -20,6 +23,15 @@ const byId = (state = {}, action) => {
     }
 
     case ADD_ARTICLE.SUCCESS: {
+      const { article } = action.payload;
+
+      return {
+        ...state,
+        [article.id]: article,
+      };
+    }
+
+    case UPDATE_ARTICLE.SUCCESS: {
       const { article } = action.payload;
 
       return {
