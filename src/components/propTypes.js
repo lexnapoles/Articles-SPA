@@ -85,4 +85,3 @@ export const inputPropType = {
   value: PropTypes.string.isRequired,
 };
 
-

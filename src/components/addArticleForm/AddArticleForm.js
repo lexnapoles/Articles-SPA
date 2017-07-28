@@ -2,6 +2,7 @@ import React from 'react';
 import { articleFormPropType } from '../propTypes';
 import './b-form.css';
 import Input from '../input/Input';
+import TextArea from '../TextArea/TextArea';
 
 // TODO: Replace tags input with a intuitive way to add tags.
 
@@ -20,8 +21,6 @@ const AddArticleForm = ({
   const inputWrapperClassName = 'b-form__input-wrapper';
   const invalidClassName = 'b-form__input_invalid';
   const invalidLabelClassName = 'b-form__label b-form__label_invalid';
-
-  const hasError = value => Boolean(value.length);
 
   return (
     <form className="b-form" onSubmit={onSubmit} >
@@ -47,14 +46,16 @@ const AddArticleForm = ({
         onChange={onAuthorChange}
       />
 
-      <div className={inputWrapperClassName}>
-        <textarea
-          className={!hasError((errors.title)) ? inputClassName : invalidClassName}
-          placeholder="Content"
-          value={content}
-          onChange={onContentChange}
-        />
-      </div>
+      <TextArea
+        className={inputClassName}
+        wrapperClassName={inputWrapperClassName}
+        invalidClassName={invalidClassName}
+        invalidLabelClassName={invalidLabelClassName}
+        error={errors.content}
+        placeholder="Content"
+        value={content}
+        onChange={onContentChange}
+      />
 
       <Input
         className={inputClassName}
