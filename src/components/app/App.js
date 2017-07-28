@@ -3,10 +3,11 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import './app.css';
 import ConnectedArticlesList from '../articlesList/ConnectedArticlesList';
 import ConnectedArticle from '../article/ConnectedArticle';
+import Header from '../header/Header';
 
 const App = () =>
   <div className="app" >
-    <header className="header" />
+    <Header onAdd={() => undefined} />
     <main className="content" >
       <BrowserRouter >
         <Switch >
