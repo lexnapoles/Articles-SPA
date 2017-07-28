@@ -3,21 +3,30 @@ import { addArticleFormPropType } from '../propTypes';
 import './b-form.css';
 
 const AddArticleForm = ({
-  article,
-  onAuthorChange,
-  onContentChange,
-  onTitleChange,
-}) => {
-  const { author, title, content } = article;
+                          article,
+                          onAuthorChange,
+                          onContentChange,
+                          onTitleChange,
+                          onTagsChange,
+                          onSubmit,
+                        }) => {
+  const { author, title, content, tags } = article;
 
   return (
-    <div className="b-form" >
-      <input placeholder="Title" value={author} onChange={onAuthorChange} />
-      <input placeholder="Author" value={title} onChange={onTitleChange} />
-      <input placeholder="Content" value={content} onChange={onContentChange} />
-    </div >
+    <form className="b-form" onSubmit={onSubmit} >
+      <input className="b-form__input" placeholder="Title" value={author} onChange={onAuthorChange} />
+
+      <input className="b-form__input" placeholder="Author" value={title} onChange={onTitleChange} />
+
+      <textarea className="b-form__input" placeholder="Content" value={content} onChange={onContentChange} />
+
+      <input className="b-form__input" placeholder="Tags: tag1;tag2;tag3..." value={tags} onChange={onTagsChange} />
+
+      <button type="submit" >Add Article</button >
+    </form >
   );
 };
 
 AddArticleForm.propTypes = addArticleFormPropType;
+
 export default AddArticleForm;

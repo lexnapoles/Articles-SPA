@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import AddArticleForm from './AddArticleForm';
 
 class AddArticleFormContainer extends Component {
@@ -13,6 +14,13 @@ class AddArticleFormContainer extends Component {
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
+  }
+
+  onSubmit() {
+    const { article } = this.state;
+
+    this.props.onSubmit(article);
   }
 
   handleInputChange(value, event) {
@@ -29,11 +37,14 @@ class AddArticleFormContainer extends Component {
         onContentChange={event => this.handleInputChange('content', event)}
         onTitleChange={event => this.handleInputChange('title', event)}
         onTagsChange={event => this.handleInputChange('tags', event)}
+        onSubmit={this.onSubmit}
       />);
   }
 }
 
-AddArticleFormContainer.propTypes = {};
-AddArticleFormContainer.defaultProps = {};
+
+AddArticleFormContainer.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
+};
 
 export default AddArticleFormContainer;

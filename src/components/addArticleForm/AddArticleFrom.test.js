@@ -16,5 +16,6 @@ it('renders without crashing', () => {
     onContentChange={() => undefined}
     onTagsChange={() => undefined}
     onTitleChange={() => undefined}
+    onSubmit={() => undefined}
   />);
 });

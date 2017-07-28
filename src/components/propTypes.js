@@ -46,4 +46,5 @@ export const addArticleFormPropType = {
   onContentChange: PropTypes.func.isRequired,
   onTitleChange: PropTypes.func.isRequired,
   onTagsChange: PropTypes.func.isRequired,
+  onSubmit: PropTypes.func.isRequired,
 };

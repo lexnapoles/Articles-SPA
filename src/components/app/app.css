@@ -49,6 +49,8 @@ h4 {
 
 .content {
     flex: 1;
+    display: flex;
+    justify-content: center;
     width: 90%;
     max-width: 108rem;
 }
