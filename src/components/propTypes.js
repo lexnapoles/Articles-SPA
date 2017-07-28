@@ -36,7 +36,7 @@ export const articleContainerPropType = {
 export const formPropType = PropTypes.shape({
   author: PropTypes.string.isRequired,
   content: PropTypes.string.isRequired,
-  tags: PropTypes.arrayOf(PropTypes.string).isRequired,
+  tags: PropTypes.PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
 });
 
@@ -56,3 +56,15 @@ export const addArticleFormPropType = {
   onTagsChange: PropTypes.func.isRequired,
   onSubmit: PropTypes.func.isRequired,
 };
+
+export const inputPropType = {
+  className: PropTypes.string.isRequired,
+  inputWrapperClassName: PropTypes.string.isRequired,
+  invalidClassName: PropTypes.string,
+  invalidLabelClassName: PropTypes.string,
+  error: PropTypes.string,
+  onChange: PropTypes.func.isRequired,
+  placeholder: PropTypes.string,
+  value: PropTypes.string.isRequired,
+};
+

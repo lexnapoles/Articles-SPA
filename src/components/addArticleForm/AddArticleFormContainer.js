@@ -11,14 +11,24 @@ class AddArticleFormContainer extends Component {
     return '';
   }
 
+  static validateTags(tags) {
+    // Tags Format: tag1;tag2;tag3;
+    const tagsFormat = /^([A-Za-z]+;)+$/ig;
+
+    const invalidTagFormat = !tags.match(tagsFormat);
+
+    return tags.length && invalidTagFormat ? 'tags does not match format' : '';
+  }
+
   static validateArticle(article) {
-    const { validateInput } = AddArticleFormContainer;
-    const { author, title, content } = article;
+    const { validateInput, validateTags } = AddArticleFormContainer;
+    const { author, title, content, tags } = article;
 
     return {
       author: validateInput(author),
       title: validateInput(title),
       content: validateInput(content),
+      tags: validateTags(tags),
     };
   }
 
@@ -35,7 +45,7 @@ class AddArticleFormContainer extends Component {
       article: {
         author: '',
         content: '',
-        tags: [''],
+        tags: '',
         title: '',
       },
       errors: {
@@ -50,7 +60,9 @@ class AddArticleFormContainer extends Component {
     this.onSubmit = this.onSubmit.bind(this);
   }
 
-  onSubmit() {
+  onSubmit(event) {
+    event.preventDefault();
+
     const { article } = this.state;
     const { validateArticle, errorsExist } = AddArticleFormContainer;
 
@@ -71,11 +83,14 @@ class AddArticleFormContainer extends Component {
     });
   }
 
-  handleInputChange(value, event) {
+  handleInputChange(field, event) {
+    const article = {
+      ...this.state.article,
+      [field]: event.target.value,
+    };
+
     this.setState({
-      article: {
-        [value]: event.target.value,
-      },
+      article,
     });
   }
 

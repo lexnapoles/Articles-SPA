@@ -1,26 +1,69 @@
 import React from 'react';
 import { addArticleFormPropType } from '../propTypes';
 import './b-form.css';
+import Input from '../input/Input';
 
 const AddArticleForm = ({
-                          article,
-                          onAuthorChange,
-                          onContentChange,
-                          onTitleChange,
-                          onTagsChange,
-                          onSubmit,
-                        }) => {
+  article,
+  errors,
+  onAuthorChange,
+  onContentChange,
+  onTitleChange,
+  onTagsChange,
+  onSubmit,
+}) => {
   const { author, title, content, tags } = article;
+
+  const inputClassName = 'b-form__input';
+  const inputWrapperClassName = 'b-form__input-wrapper';
+  const invalidClassName = 'b-form__input_invalid';
+  const invalidLabelClassName = 'b-form__label b-form__label_invalid';
+
+  const hasError = value => Boolean(value.length);
 
   return (
     <form className="b-form" onSubmit={onSubmit} >
-      <input className="b-form__input" placeholder="Title" value={author} onChange={onAuthorChange} />
+      <Input
+        className={inputClassName}
+        wrapperClassName={inputWrapperClassName}
+        invalidClassName={invalidClassName}
+        invalidLabelClassName={invalidLabelClassName}
+        error={errors.title}
+        placeholder="Title"
+        value={title}
+        onChange={onTitleChange}
+      />
 
-      <input className="b-form__input" placeholder="Author" value={title} onChange={onTitleChange} />
+      <Input
+        className={inputClassName}
+        wrapperClassName={inputWrapperClassName}
+        invalidClassName={invalidClassName}
+        invalidLabelClassName={invalidLabelClassName}
+        error={errors.author}
+        placeholder="Author"
+        value={author}
+        onChange={onAuthorChange}
+      />
 
-      <textarea className="b-form__input" placeholder="Content" value={content} onChange={onContentChange} />
+      <div className={inputWrapperClassName}>
+        <textarea
+          className={!hasError((errors.title)) ? inputClassName : invalidClassName}
+          placeholder="Content"
+          value={content}
+          onChange={onContentChange}
+        />
+      </div>
 
-      <input className="b-form__input" placeholder="Tags: tag1;tag2;tag3..." value={tags} onChange={onTagsChange} />
+      <Input
+        className={inputClassName}
+        wrapperClassName={inputWrapperClassName}
+        invalidClassName={invalidClassName}
+        invalidLabelClassName={invalidLabelClassName}
+        error={errors.tags}
+        placeholder="Tags: tag1;tag2;tag3;"
+        value={tags}
+        onChange={onTagsChange}
+      />
 
       <button type="submit" >Add Article</button >
     </form >

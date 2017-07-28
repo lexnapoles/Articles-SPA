@@ -1,4 +1,5 @@
 .b-form {
+    width: 100%;
     display: flex;
     flex-flow: column nowrap;
     background: #F9F9F9;
@@ -10,10 +11,27 @@
     max-height: max-content;
 }
 
-.b-form__input {
-    margin-bottom: 2rem;
+.b-form__input-wrapper {
+    display: flex;
+    flex-flow: column nowrap;
 }
 
-.b-form_label {
-    display: block;
+.b-form__input {
+    margin-bottom: 2rem;
+    max-width: 100%;
 }
+
+.b-form__label {
+    display: block;
+    margin: -2rem 0 1rem 0;
+}
+
+.b-form__input_invalid {
+    margin-bottom: 2rem;
+    border: 1px solid red;
+}
+
+.b-form__label_invalid {
+    color: red;
+}
+

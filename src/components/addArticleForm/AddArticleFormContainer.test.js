@@ -10,7 +10,7 @@ it('validates the article', () => {
   const article = {
     author: '',
     content: '',
-    tags: [''],
+    tags: '',
     title: '',
   };
 
