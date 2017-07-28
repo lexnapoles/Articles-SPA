@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import { getArticleById } from '../../selectors/articles';
 import ArticleContainer from './ArticleContainer';
 import { loadArticle } from '../../actions/articles';
-import { hasAllFields } from '../../utils';
+import { hasAllFields } from '../../../utils';
 
 const articleKeys = ['author', 'content', 'published', 'tags', 'title'];
 

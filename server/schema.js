@@ -8,6 +8,7 @@ import {
   GraphQLSchema,
 } from 'graphql';
 import db from './db';
+import { getExcerpt } from '../utils';
 
 const articleType = new GraphQLObjectType({
   name: 'Article',
@@ -93,6 +94,30 @@ const deleteArticleInputType = new GraphQLInputObjectType({
   }),
 });
 
+const updateArticleInputType = new GraphQLInputObjectType({
+  name: 'UpdateArticleInput',
+  fields: () => ({
+    id: {
+      type: GraphQLString,
+    },
+    author: {
+      type: GraphQLString,
+    },
+    content: {
+      type: GraphQLString,
+    },
+    published: {
+      type: GraphQLBoolean,
+    },
+    tags: {
+      type: new GraphQLList(GraphQLString),
+    },
+    title: {
+      type: GraphQLString,
+    },
+  }),
+});
+
 const Mutation = new GraphQLObjectType({
   name: 'Mutation',
   description: 'This is a root mutation',
@@ -120,6 +145,22 @@ const Mutation = new GraphQLObjectType({
       resolve(_, { article }) {
         return db.Article.findByIdAndRemove(article.id)
           .then(({ id }) => id);
+      },
+    },
+    updateArticle: {
+      type: articleType,
+      args: {
+        article: {
+          type: new GraphQLNonNull(updateArticleInputType),
+        },
+      },
+      resolve(_, { article }) {
+        const updatedArticle = {
+          ...article,
+          excerpt: getExcerpt(article),
+        };
+
+        return db.Article.findByIdAndUpdate(article.id, updatedArticle);
       },
     },
   }),

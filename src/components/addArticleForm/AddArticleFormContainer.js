@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import AddArticleForm from './AddArticleForm';
+import { getExcerpt } from '../../../utils';
 
 class AddArticleFormContainer extends Component {
   static validateInput(value) {
@@ -38,14 +39,12 @@ class AddArticleFormContainer extends Component {
     return keys.some(key => errors[key].length);
   }
 
-  static getSubmittableArticle(data) {
-    const EXCERPT_LENGTH = 200;
-
-    const excerpt = data.content.substr(0, EXCERPT_LENGTH);
-    const tags = data.tags.split(';');
+  static getSubmittableArticle(article) {
+    const excerpt = getExcerpt(article);
+    const tags = article.tags.split(';');
 
     return {
-      ...data,
+      ...article,
       excerpt,
       tags,
     };

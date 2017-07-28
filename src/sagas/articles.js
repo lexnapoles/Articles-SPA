@@ -5,7 +5,7 @@ import {
   LOAD_ARTICLE,
 } from '../constants/actionTypes';
 import { getArticleById } from '../selectors/articles';
-import { hasAllFields } from '../utils';
+import { hasAllFields } from '../../utils';
 
 // Workers
 
