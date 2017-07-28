@@ -4,7 +4,7 @@ import './app.css';
 import ConnectedArticlesList from '../articlesList/ConnectedArticlesList';
 import ConnectedArticle from '../article/ConnectedArticle';
 import ConnectedHeader from '../header/ConnectedHeader';
-import AddArticleFormContainer from '../addArticleForm/AddArticleFormContainer';
+import ConnectedAddFormContainer from '../addArticleForm/ConnectedAddFormContainer';
 
 const App = () =>
   <BrowserRouter >
@@ -16,7 +16,7 @@ const App = () =>
       <main className="content" >
         <Switch >
           <Route exact path="/" component={ConnectedArticlesList} />
-          <Route exact path="/add" component={AddArticleFormContainer} />
+          <Route exact path="/add" component={ConnectedAddFormContainer} />
           <Route path="/:id" component={ConnectedArticle} />
         </Switch >
       </main >

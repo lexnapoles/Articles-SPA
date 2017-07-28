@@ -40,8 +40,16 @@ export const formPropType = PropTypes.shape({
   title: PropTypes.string.isRequired,
 });
 
+export const errorFormPropType = PropTypes.shape({
+  author: PropTypes.string.isRequired,
+  content: PropTypes.string.isRequired,
+  tags: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+});
+
 export const addArticleFormPropType = {
-  article: formPropType,
+  article: formPropType.isRequired,
+  errors: errorFormPropType.isRequired,
   onAuthorChange: PropTypes.func.isRequired,
   onContentChange: PropTypes.func.isRequired,
   onTitleChange: PropTypes.func.isRequired,
