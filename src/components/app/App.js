@@ -17,7 +17,7 @@ const App = () =>
         <Switch >
           <Route exact path="/" component={ConnectedArticlesList} />
           <Route exact path="/add" component={AddArticleFormContainer} />
-          <Route exact path="/:id" component={ConnectedArticle} />
+          <Route path="/:id" component={ConnectedArticle} />
         </Switch >
       </main >
       <footer className="footer" />

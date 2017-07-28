@@ -17,7 +17,7 @@ class AddArticleFormContainer extends Component {
 
   handleInputChange(value, event) {
     this.setState({
-      value: event.target.value,
+      [value]: event.target.value,
     });
   }
 

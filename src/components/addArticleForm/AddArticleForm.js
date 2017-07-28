@@ -1,5 +1,6 @@
 import React from 'react';
 import { addArticleFormPropType } from '../propTypes';
+import './b-form.css';
 
 const AddArticleForm = ({
   article,
@@ -10,9 +11,9 @@ const AddArticleForm = ({
   const { author, title, content } = article;
 
   return (
-    <div >
-      <input placeholder="Title" value={author} onChange={onTitleChange} />
-      <input placeholder="Author" value={title} onChange={onAuthorChange} />
+    <div className="b-form" >
+      <input placeholder="Title" value={author} onChange={onAuthorChange} />
+      <input placeholder="Author" value={title} onChange={onTitleChange} />
       <input placeholder="Content" value={content} onChange={onContentChange} />
     </div >
   );
