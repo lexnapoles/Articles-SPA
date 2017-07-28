@@ -36,3 +36,15 @@ mutation ($article: AddArticleInput!) {
     title
   }
 }`;
+
+export const UPDATE_ARTICLE_QUERY = `
+mutation ($article: UpdateArticleInput!) {
+  updateArticle(article: $article) {
+    id
+    author
+    content
+    published
+    tags
+    title
+  }
+}`;

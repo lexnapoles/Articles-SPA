@@ -11,4 +11,6 @@ export const DELETE_ARTICLE = asyncActionTypes('DELETE_ARTICLE');
 
 export const ADD_ARTICLE = asyncActionTypes('ADD_ARTICLE');
 
+export const UPDATE_ARTICLE = asyncActionTypes('UPDATE_ARTICLE');
+
 export const LOAD_ARTICLE = 'LOAD_ARTICLE';

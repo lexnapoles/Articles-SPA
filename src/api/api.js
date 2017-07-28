@@ -1,19 +1,33 @@
 import request from '../api/request';
-import { ADD_ARTICLE_QUERY, ARTICLE_BY_ID_QUERY, ARTICLES_QUERY, DELETE_ARTICLE_QUERY } from './queries';
+import {
+  ADD_ARTICLE_QUERY, ARTICLE_BY_ID_QUERY, ARTICLES_QUERY, DELETE_ARTICLE_QUERY,
+  UPDATE_ARTICLE_QUERY,
+} from './queries';
 import { normalizeArticles } from './schema';
 
-export const fetchArticles = () =>
-  request(ARTICLES_QUERY)
-    .then(({ data }) => normalizeArticles(data));
+const requestData = (query, selector, variables = {}) =>
+  request(query, variables)
+    .then(({ data }) => selector(data));
 
-export const fetchArticleById = id =>
-  request(ARTICLE_BY_ID_QUERY, { id })
-    .then(({ data }) => data.article);
 
-export const deleteArticle = id =>
-  request(DELETE_ARTICLE_QUERY, { article: { id } })
-    .then(({ data }) => data.deleteArticle);
+export const fetchArticles = () => requestData(ARTICLES_QUERY, normalizeArticles);
 
-export const addArticle = article =>
-  request(ADD_ARTICLE_QUERY, { article })
-    .then(({ data }) => data.addArticle);
+export const fetchArticleById = id => requestData(
+  ARTICLE_BY_ID_QUERY,
+  ({ article }) => article,
+  { id });
+
+export const deleteArticle = id => requestData(
+  DELETE_ARTICLE_QUERY,
+  data => data.deleteArticle,
+  { article: { id } });
+
+export const addArticle = article => requestData(
+  ADD_ARTICLE_QUERY,
+  data => data.addArticle,
+  { article });
+
+export const updateArticle = article => requestData(
+  UPDATE_ARTICLE_QUERY,
+  data => data.updateArticle,
+  { article });

@@ -3,7 +3,7 @@ import {
   DELETE_ARTICLE,
   FETCH_ARTICLE_BY_ID,
   FETCH_ARTICLES,
-  LOAD_ARTICLE,
+  LOAD_ARTICLE, UPDATE_ARTICLE,
 } from '../constants/actionTypes';
 
 export const fetchArticles = () => ({
@@ -32,6 +32,13 @@ export const deleteArticle = id => ({
 
 export const addArticle = article => ({
   type: ADD_ARTICLE.REQUEST,
+  payload: {
+    article,
+  },
+});
+
+export const updateArticle = article => ({
+  type: UPDATE_ARTICLE.REQUEST,
   payload: {
     article,
   },
