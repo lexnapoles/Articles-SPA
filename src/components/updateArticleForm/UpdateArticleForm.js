@@ -1,11 +1,11 @@
 import React from 'react';
 import { articleFormPropType } from '../propTypes';
-import './b-form.css';
+import '../addArticleForm/b-form.css';
 import Input from '../input/Input';
 
 // TODO: Replace tags input with a intuitive way to add tags.
 
-const AddArticleForm = ({
+const UpdateArticleForm = ({
   article,
   errors,
   onAuthorChange,
@@ -17,6 +17,7 @@ const AddArticleForm = ({
   const { author, title, content, tags } = article;
 
   const inputClassName = 'b-form__input';
+  const labelClassName = 'b-form__label';
   const inputWrapperClassName = 'b-form__input-wrapper';
   const invalidClassName = 'b-form__input_invalid';
   const invalidLabelClassName = 'b-form__label b-form__label_invalid';
@@ -28,10 +29,11 @@ const AddArticleForm = ({
       <Input
         className={inputClassName}
         wrapperClassName={inputWrapperClassName}
+        labelClassName={labelClassName}
         invalidClassName={invalidClassName}
         invalidLabelClassName={invalidLabelClassName}
         error={errors.title}
-        placeholder="Title"
+        title={'Title'}
         value={title}
         onChange={onTitleChange}
       />
@@ -39,18 +41,19 @@ const AddArticleForm = ({
       <Input
         className={inputClassName}
         wrapperClassName={inputWrapperClassName}
+        labelClassName={labelClassName}
+        title={'Author'}
         invalidClassName={invalidClassName}
         invalidLabelClassName={invalidLabelClassName}
         error={errors.author}
-        placeholder="Author"
         value={author}
         onChange={onAuthorChange}
       />
 
       <div className={inputWrapperClassName}>
+        <label className={labelClassName}>Content</label>
         <textarea
           className={!hasError((errors.title)) ? inputClassName : invalidClassName}
-          placeholder="Content"
           value={content}
           onChange={onContentChange}
         />
@@ -59,19 +62,20 @@ const AddArticleForm = ({
       <Input
         className={inputClassName}
         wrapperClassName={inputWrapperClassName}
+        labelClassName={labelClassName}
+        title={'Tags'}
         invalidClassName={invalidClassName}
         invalidLabelClassName={invalidLabelClassName}
         error={errors.tags}
-        placeholder="tag1 or tag1;tag2"
         value={tags}
         onChange={onTagsChange}
       />
 
-      <button type="submit" >Add Article</button >
+      <button type="submit" >Update Article</button >
     </form >
   );
 };
 
-AddArticleForm.propTypes = articleFormPropType;
+UpdateArticleForm.propTypes = articleFormPropType;
 
-export default AddArticleForm;
+export default UpdateArticleForm;

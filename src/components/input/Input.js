@@ -6,6 +6,8 @@ const Input = ({
   inputWrapperClassName,
   invalidClassName,
   invalidLabelClassName,
+  labelClassName,
+  title,
   placeholder,
   value,
   onChange,
@@ -14,14 +16,15 @@ const Input = ({
   const hasError = error.length;
 
   return (
-    <div className={inputWrapperClassName}>
+    <div className={inputWrapperClassName} >
+      {title ? <label className={labelClassName} >{title}</label > : ''}
       <input
         className={!hasError ? className : `${className} ${invalidClassName}`}
         placeholder={placeholder}
         value={value}
         onChange={onChange}
       />
-      {hasError ? <label className={invalidLabelClassName}>{error}</label > : ''}
+      {hasError ? <label className={`${labelClassName} ${invalidLabelClassName}`} >{error}</label > : ''}
     </div >
   );
 };
@@ -35,6 +38,7 @@ Input.defaultProps = {
   placeholder: '',
   error: '',
   invalidLabelClassName: '',
+  labelClassName: '',
 };
 
 export default Input;

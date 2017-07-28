@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { singleArticlePropType } from '../propTypes';
+import { singleArticlePropTypeShape } from '../propTypes';
 import './b-article.css';
 
 class Article extends Component {
@@ -24,6 +24,6 @@ class Article extends Component {
 }
 
 Article.propTypes = {
-  article: singleArticlePropType,
+  article: singleArticlePropTypeShape,
 };
 export default Article;

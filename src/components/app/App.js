@@ -5,6 +5,7 @@ import ConnectedArticlesList from '../articlesList/ConnectedArticlesList';
 import ConnectedArticle from '../article/ConnectedArticle';
 import ConnectedHeader from '../header/ConnectedHeader';
 import ConnectedAddFormContainer from '../addArticleForm/ConnectedAddFormContainer';
+import ConnectedUpdateFormContainer from '../updateArticleForm/ConnectedUpdateFormContainer';
 
 const App = () =>
   <BrowserRouter >
@@ -17,6 +18,7 @@ const App = () =>
         <Switch >
           <Route exact path="/" component={ConnectedArticlesList} />
           <Route exact path="/add" component={ConnectedAddFormContainer} />
+          <Route exact path="/update/:id" component={ConnectedUpdateFormContainer} />
           <Route path="/:id" component={ConnectedArticle} />
         </Switch >
       </main >
