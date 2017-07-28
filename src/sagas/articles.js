@@ -2,7 +2,7 @@ import { call, put, takeEvery, select, take, fork } from 'redux-saga/effects';
 import * as Api from '../api/api';
 import {
   ADD_ARTICLE, DELETE_ARTICLE, FETCH_ARTICLE_BY_ID, FETCH_ARTICLES,
-  LOAD_ARTICLE,
+  LOAD_ARTICLE, UPDATE_ARTICLE,
 } from '../constants/actionTypes';
 import { getArticleById } from '../selectors/articles';
 import { hasAllFields } from '../../utils';
@@ -27,6 +27,17 @@ export const deleteArticle = function* (id) {
     type: DELETE_ARTICLE.SUCCESS,
     payload: {
       id: articleId,
+    },
+  });
+};
+
+export const updateArticle = function* (article) {
+  const updatedArticle = yield call(Api.updateArticle, article);
+
+  yield put({
+    type: UPDATE_ARTICLE.SUCCESS,
+    payload: {
+      article: updatedArticle,
     },
   });
 };
@@ -67,6 +78,14 @@ export const watchAddArticle = function* () {
     const { payload } = yield take(ADD_ARTICLE.REQUEST);
 
     yield fork(addArticle, payload.article);
+  }
+};
+
+export const watchUpdateArticle = function* () {
+  while (true) {
+    const { payload } = yield take(UPDATE_ARTICLE.REQUEST);
+
+    yield fork(updateArticle, payload.article);
   }
 };
 

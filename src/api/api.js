@@ -9,7 +9,6 @@ const requestData = (query, selector, variables = {}) =>
   request(query, variables)
     .then(({ data }) => selector(data));
 
-
 export const fetchArticles = () => requestData(ARTICLES_QUERY, normalizeArticles);
 
 export const fetchArticleById = id => requestData(

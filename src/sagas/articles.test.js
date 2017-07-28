@@ -1,12 +1,12 @@
 import { call, put, takeEvery, fork } from 'redux-saga/effects';
 import {
   watchFetchArticles, fetchArticles, fetchArticleById, loadArticle, watchLoadArticle,
-  deleteArticle, watchDeleteArticle, addArticle,
+  deleteArticle, watchDeleteArticle, addArticle, watchAddArticle, updateArticle, watchUpdateArticle,
 } from './articles';
 import * as Api from '../api/api';
 import {
   ADD_ARTICLE, DELETE_ARTICLE, FETCH_ARTICLE_BY_ID, FETCH_ARTICLES,
-  LOAD_ARTICLE,
+  LOAD_ARTICLE, UPDATE_ARTICLE,
 } from '../constants/actionTypes';
 
 describe('fetchArticles', () => {
@@ -146,6 +146,26 @@ describe('deleteArticle', () => {
   });
 });
 
+describe('watchDeleteArticle', () => {
+  it('spawns a new deleteArticle worker every DELETE_ARTICLE_REQUEST action', () => {
+    const iterator = watchDeleteArticle();
+
+    iterator.next();
+
+    const id = '5978b81ed092522a4c85a481';
+    const action = {
+      type: DELETE_ARTICLE.REQUEST,
+      payload: {
+        id,
+      },
+    };
+
+    const spawnDeleteArticle = iterator.next(action).value;
+
+    expect(spawnDeleteArticle).toEqual(fork(deleteArticle, id));
+  });
+});
+
 describe('addArticle', () => {
   it('calls the add article service', () => {
     const article = {
@@ -194,22 +214,114 @@ describe('addArticle', () => {
   });
 });
 
-describe('watchDeleteArticle', () => {
-  it('spawns a new deleteArticle worker every DELETE_ARTICLE_REQUEST action', () => {
-    const iterator = watchDeleteArticle();
+describe('watchAddArticle', () => {
+  it('spawns a new addArticle worker every ADD_ARTICLE_REQUEST action', () => {
+    const iterator = watchAddArticle();
 
     iterator.next();
 
-    const id = '5978b81ed092522a4c85a481';
+    const article = {
+      author: 'Author',
+      content: 'New Content',
+      excerpt: 'Excerpt',
+      tags: ['Tag', 'New Tag'],
+      title: 'Title',
+    };
+
     const action = {
-      type: DELETE_ARTICLE.REQUEST,
+      type: ADD_ARTICLE.REQUEST,
       payload: {
-        id,
+        article,
       },
     };
 
-    const spawnDeleteArticle = iterator.next(action).value;
+    const spawnAddArticle = iterator.next(action).value;
 
-    expect(spawnDeleteArticle).toEqual(fork(deleteArticle, id));
+    expect(spawnAddArticle).toEqual(fork(addArticle, article));
   });
 });
+
+describe('updateArticle', () => {
+  it('calls the update article service', () => {
+    const article = {
+      id: '5978b81ed092522a4c85a481',
+      author: 'Author',
+      content: 'New Content',
+      published: true,
+      tags: ['Tag', 'New Tag'],
+      title: 'Title',
+    };
+
+    const iterator = updateArticle(article);
+
+    const callUpdateService = iterator.next().value;
+
+    expect(callUpdateService).toEqual(call(Api.updateArticle, article));
+  });
+
+  it('dispatches the UPDATE_ARTICLE_SUCCESS when the article has been updated', () => {
+    const article = {
+      id: '5978b81ed092522a4c85a481',
+      author: 'Author',
+      content: 'New Content',
+      published: true,
+      tags: ['Tag', 'New Tag'],
+      title: 'Title',
+    };
+
+    const iterator = updateArticle(article);
+
+    iterator.next();
+
+    const receivedArticle = {
+      id: '5978b81ed092522a4c85a481',
+      author: 'Author',
+      content: 'New Content',
+      excerpt: 'New Content',
+      tags: ['Tag', 'New Tag'],
+      title: 'Title',
+      published: true,
+    };
+
+    const dispatchSuccessAction = iterator.next(receivedArticle).value;
+
+    const expectedPut = put({
+      type: UPDATE_ARTICLE.SUCCESS,
+      payload: {
+        article: receivedArticle,
+      },
+    });
+
+    expect(dispatchSuccessAction).toEqual(expectedPut);
+  });
+});
+
+describe('watchUpdateArticle', () => {
+  it('spawns a new updateArticle worker every UPDATE_ARTICLE_REQUEST action', () => {
+    const iterator = watchUpdateArticle();
+
+    iterator.next();
+
+    const article = {
+      id: '5978b81ed092522a4c85a481',
+      author: 'Author',
+      content: 'New Content',
+      published: true,
+      tags: ['Tag', 'New Tag'],
+      title: 'Title',
+    };
+
+
+    const action = {
+      type: UPDATE_ARTICLE.REQUEST,
+      payload: {
+        article,
+      },
+    };
+
+    const spawnUpdateArticle = iterator.next(action).value;
+
+    expect(spawnUpdateArticle).toEqual(fork(updateArticle, article));
+  });
+});
+
