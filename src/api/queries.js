@@ -7,8 +7,9 @@ export const ARTICLES_QUERY = `{
   }
 }`;
 
-export const ARTICLE_BY_ID_QUERY = id => `{
-  article(id: "${id}") {
+export const ARTICLE_BY_ID_QUERY = `
+  query ($id: String!) {
+    article(id: $id) {
     id
     author
     content
@@ -18,23 +19,14 @@ export const ARTICLE_BY_ID_QUERY = id => `{
   }
 }`;
 
-
-export const DELETE_ARTICLE_QUERY = id => `
-mutation {
-  deleteArticle(article: {
-    id: "${id}"
-  })
+export const DELETE_ARTICLE_QUERY = `
+mutation ($article: DeleteArticleInput!) {
+  deleteArticle(article: $article)
 }`;
 
-export const ADD_ARTICLE_QUERY = ({ author, content, excerpt, tags, title }) => `
-mutation {
-  addArticle(article: {
-    author: "${author}"
-    content: "${content}"
-    excerpt: "${excerpt}"
-    tags: "${tags}"
-    title: "${title}"
-  }) {
+export const ADD_ARTICLE_QUERY = `
+mutation ($article: AddArticleInput!) {
+  addArticle(article: $article) {
     author
     content
     excerpt

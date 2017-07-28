@@ -7,13 +7,13 @@ export const fetchArticles = () =>
     .then(({ data }) => normalizeArticles(data));
 
 export const fetchArticleById = id =>
-  request(ARTICLE_BY_ID_QUERY(id))
+  request(ARTICLE_BY_ID_QUERY, { id })
     .then(({ data }) => data.article);
 
 export const deleteArticle = id =>
-  request(DELETE_ARTICLE_QUERY(id))
+  request(DELETE_ARTICLE_QUERY, { article: { id } })
     .then(({ data }) => data.deleteArticle);
 
 export const addArticle = article =>
-  request(ADD_ARTICLE_QUERY(article))
+  request(ADD_ARTICLE_QUERY, { article })
     .then(({ data }) => data.addArticle);
