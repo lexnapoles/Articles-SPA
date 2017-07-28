@@ -32,3 +32,18 @@ export const articleContainerPropType = {
   id: PropTypes.string.isRequired,
   loadArticle: PropTypes.func.isRequired,
 };
+
+export const formPropType = PropTypes.shape({
+  author: PropTypes.string.isRequired,
+  content: PropTypes.string.isRequired,
+  tags: PropTypes.arrayOf(PropTypes.string).isRequired,
+  title: PropTypes.string.isRequired,
+});
+
+export const addArticleFormPropType = {
+  article: formPropType,
+  onAuthorChange: PropTypes.func.isRequired,
+  onContentChange: PropTypes.func.isRequired,
+  onTitleChange: PropTypes.func.isRequired,
+  onTagsChange: PropTypes.func.isRequired,
+};
