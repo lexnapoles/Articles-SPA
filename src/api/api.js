@@ -13,3 +13,7 @@ export const fetchArticleById = id =>
 export const deleteArticle = id =>
   request(DELETE_ARTICLE_QUERY(id))
     .then(({ data }) => data.deleteArticle);
+
+export const addArticle = article =>
+  request(DELETE_ARTICLE_QUERY(article))
+    .then(({ data }) => data.addArticle);

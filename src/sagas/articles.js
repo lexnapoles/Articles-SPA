@@ -1,10 +1,24 @@
 import { call, put, takeEvery, select, take, fork } from 'redux-saga/effects';
 import * as Api from '../api/api';
-import { DELETE_ARTICLE, FETCH_ARTICLE_BY_ID, FETCH_ARTICLES, LOAD_ARTICLE } from '../constants/actionTypes';
+import {
+  ADD_ARTICLE, DELETE_ARTICLE, FETCH_ARTICLE_BY_ID, FETCH_ARTICLES,
+  LOAD_ARTICLE,
+} from '../constants/actionTypes';
 import { getArticleById } from '../selectors/articles';
 import { hasAllFields } from '../utils';
 
 // Workers
+
+export const addArticle = function* (article) {
+  const newArticle = yield call(Api.addArticle, article);
+
+  yield put({
+    type: ADD_ARTICLE.SUCCESS,
+    payload: {
+      article: newArticle,
+    },
+  });
+};
 
 export const deleteArticle = function* (id) {
   const articleId = yield call(Api.deleteArticle, id);
@@ -46,6 +60,14 @@ export const loadArticle = function* (id, requiredFields) {
 
 export const watchFetchArticles = function* () {
   yield takeEvery(FETCH_ARTICLES.REQUEST, fetchArticles);
+};
+
+export const watchAddArticle = function* () {
+  while (true) {
+    const { payload } = yield take(ADD_ARTICLE.REQUEST);
+
+    yield fork(addArticle, payload.article);
+  }
 };
 
 export const watchDeleteArticle = function* () {

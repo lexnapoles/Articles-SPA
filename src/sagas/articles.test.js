@@ -1,10 +1,13 @@
 import { call, put, takeEvery, fork } from 'redux-saga/effects';
 import {
   watchFetchArticles, fetchArticles, fetchArticleById, loadArticle, watchLoadArticle,
-  deleteArticle, watchDeleteArticle,
+  deleteArticle, watchDeleteArticle, addArticle,
 } from './articles';
 import * as Api from '../api/api';
-import { DELETE_ARTICLE, FETCH_ARTICLE_BY_ID, FETCH_ARTICLES, LOAD_ARTICLE } from '../constants/actionTypes';
+import {
+  ADD_ARTICLE, DELETE_ARTICLE, FETCH_ARTICLE_BY_ID, FETCH_ARTICLES,
+  LOAD_ARTICLE,
+} from '../constants/actionTypes';
 
 describe('fetchArticles', () => {
   it('calls the fetch articles service', () => {
@@ -140,6 +143,54 @@ describe('deleteArticle', () => {
     const dispatchSuccessAction = iterator.next(id).value;
 
     expect(dispatchSuccessAction).toEqual(put({ type: DELETE_ARTICLE.SUCCESS, payload: { id } }));
+  });
+});
+
+describe('addArticle', () => {
+  it('calls the add article service', () => {
+    const article = {
+      author: 'Author',
+      content: 'New Content',
+      excerpt: 'Excerpt',
+      tags: ['Tag', 'New Tag'],
+      title: 'Title',
+    };
+
+    const iterator = addArticle(article);
+
+    const callAddService = iterator.next().value;
+
+    expect(callAddService).toEqual(call(Api.addArticle, article));
+  });
+
+  it('dispatches the ADD_ARTICLE_SUCCESS when the article has been added', () => {
+    const article = {
+      author: 'Author',
+      content: 'New Content',
+      excerpt: 'Excerpt',
+      tags: ['Tag', 'New Tag'],
+      title: 'Title',
+    };
+
+    const iterator = addArticle(article);
+
+    iterator.next();
+
+    const receivedArticle = {
+      id: '5978b81ed092522a4c85a481',
+      author: 'Author',
+      content: 'New Content',
+      excerpt: 'Excerpt',
+      tags: ['Tag', 'New Tag'],
+      title: 'Title',
+      published: false,
+    };
+
+    const dispatchSuccessAction = iterator.next(receivedArticle).value;
+
+    const expectedPut = put({ type: ADD_ARTICLE.SUCCESS, payload: { article: receivedArticle } });
+
+    expect(dispatchSuccessAction).toEqual(expectedPut);
   });
 });
 

@@ -23,3 +23,10 @@ export const deleteArticle = id => ({
     id,
   },
 });
+
+export const addArticle = article => ({
+  type: DELETE_ARTICLE.REQUEST,
+  payload: {
+    article,
+  },
+});

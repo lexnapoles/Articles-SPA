@@ -25,3 +25,22 @@ mutation {
     id: "${id}"
   })
 }`;
+
+export const ADD_ARTICLE_QUERY = ({ author, content, excerpt, tags, title }) => `
+mutation {
+  addArticle(article: {
+    author: "${author}"
+    content: "${content}"
+    excerpt: "${excerpt}"
+    tags: "${tags}"
+    title: "${title}"
+  }) {
+    author
+    content
+    excerpt
+    id
+    published
+    tags
+    title
+  }
+}`;
