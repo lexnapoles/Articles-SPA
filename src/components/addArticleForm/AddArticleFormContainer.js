@@ -12,12 +12,12 @@ class AddArticleFormContainer extends Component {
   }
 
   static validateTags(tags) {
-    // Tags Format: tag1;tag2;tag3;
-    const tagsFormat = /^([A-Za-z]+;)+$/ig;
+    // Tags Format: tag1;tag2;tag3 || tag1
+    const tagsFormat = /^((\w+;)+)?\w+$/ig;
 
     const invalidTagFormat = !tags.match(tagsFormat);
 
-    return tags.length && invalidTagFormat ? 'tags does not match format' : '';
+    return tags.length && invalidTagFormat ? 'Invalid tags format: tag1;tag2' : '';
   }
 
   static validateArticle(article) {
@@ -35,7 +35,20 @@ class AddArticleFormContainer extends Component {
   static errorsExist(errors) {
     const keys = Object.keys(errors);
 
-    return keys.some(error => error.length);
+    return keys.some(key => errors[key].length);
+  }
+
+  static getSubmittableArticle(data) {
+    const EXCERPT_LENGTH = 200;
+
+    const excerpt = data.content.substr(0, EXCERPT_LENGTH);
+    const tags = data.tags.split(';');
+
+    return {
+      ...data,
+      excerpt,
+      tags,
+    };
   }
 
   constructor(props) {
@@ -64,7 +77,7 @@ class AddArticleFormContainer extends Component {
     event.preventDefault();
 
     const { article } = this.state;
-    const { validateArticle, errorsExist } = AddArticleFormContainer;
+    const { validateArticle, errorsExist, getSubmittableArticle } = AddArticleFormContainer;
 
     const errors = validateArticle(article);
 
@@ -74,7 +87,7 @@ class AddArticleFormContainer extends Component {
       return;
     }
 
-    this.props.onSubmit(article);
+    this.props.onSubmit(getSubmittableArticle(article));
   }
 
   addErrors(errors) {

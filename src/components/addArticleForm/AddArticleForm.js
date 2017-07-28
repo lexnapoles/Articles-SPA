@@ -3,6 +3,8 @@ import { addArticleFormPropType } from '../propTypes';
 import './b-form.css';
 import Input from '../input/Input';
 
+// TODO: Replace tags input with a intuitive way to add tags.
+
 const AddArticleForm = ({
   article,
   errors,
@@ -60,7 +62,7 @@ const AddArticleForm = ({
         invalidClassName={invalidClassName}
         invalidLabelClassName={invalidLabelClassName}
         error={errors.tags}
-        placeholder="Tags: tag1;tag2;tag3;"
+        placeholder="tag1 or tag1;tag2"
         value={tags}
         onChange={onTagsChange}
       />
