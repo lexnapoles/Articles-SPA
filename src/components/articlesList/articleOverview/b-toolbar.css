@@ -1,0 +1,21 @@
+.b-toolbar {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.b-toolbar__item {
+    margin-left: .5rem;
+}
+
+.b-toolbar__item:hover {
+    background: #C2C2C2;
+    padding: .2rem;
+    border-radius: .5rem;
+}
+
+.b-toolbar__item:active {
+    filter: invert(100%);
+    padding: .2rem;
+    border-radius: .5rem;
+}
+

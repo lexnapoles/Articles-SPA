@@ -1,0 +1,39 @@
+.b-list {
+    display: flex;
+    flex-flow: column wrap;
+}
+
+.b-list__item {
+    flex: 1;
+    padding: 1rem;
+    margin-bottom: .5rem;
+    background: #F9F9F9;
+    box-shadow: 0 2px 10px #C2C2C2;
+    border: 1px solid #C2C2C2;
+    border-radius: .5rem;
+}
+
+@media screen and (min-width: 800px) {
+    .b-list {
+        flex-flow: row wrap;
+        justify-content: space-between;
+    }
+
+    .b-list__item {
+        max-width: 44%;
+        flex: 1 1 44%;
+        margin-bottom: 3%;
+    }
+}
+
+@media screen and (min-width: 1300px) {
+    .b-list__item {
+        max-width: 29%;
+        flex: 1 1 29%;
+        margin-bottom: 2%;
+    }
+}
+
+
+
+

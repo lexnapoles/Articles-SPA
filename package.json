@@ -4,17 +4,29 @@
   "private": true,
   "dependencies": {
     "axios": "^0.16.1",
+    "lodash": "^4.17.4",
+    "normalize.css": "^7.0.0",
+    "normalizr": "^3.2.3",
     "react": "^15.5.4",
-    "react-dom": "^15.5.4"
+    "react-dom": "^15.5.4",
+    "react-icons": "^2.2.5",
+    "react-redux": "^5.0.5",
+    "react-router-dom": "^4.1.2",
+    "redux": "^3.7.2",
+    "redux-devtools-extension": "^2.13.2",
+    "redux-saga": "^0.15.6"
   },
   "devDependencies": {
     "babel-eslint": "^7.2.3",
+    "enzyme": "^2.9.1",
     "eslint": "^3.19.0",
     "eslint-config-airbnb": "^14.1.0",
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-jsx-a11y": "^4.0.0",
     "eslint-plugin-react": "^6.10.3",
-    "react-scripts": "0.9.5"
+    "prop-types": "^15.5.10",
+    "react-scripts": "0.9.5",
+    "react-test-renderer": "^15.6.1"
   },
   "scripts": {
     "start": "react-scripts start",

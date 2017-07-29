@@ -1,0 +1,24 @@
+.b-article {
+    max-width: 40rem;
+    margin: 0 auto;
+}
+
+.b-article__content {
+    line-height: 1.618;
+    margin: 2rem 0;
+}
+
+.b-article__header {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+}
+
+.b-article__tag {
+    font-size: small;
+    margin-right: 1rem;
+    background: white;
+    border: 1px solid #C2C2C2;
+    border-radius: .5rem;
+    padding: .5rem;
+}
