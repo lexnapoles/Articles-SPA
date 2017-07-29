@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import Article from './Article';
+import Input from './Input';
 
 it('renders without crashing', () => {
-  shallow(<Article onUpdate={() => undefined} />);
+  shallow(<Input className="" onChange={() => undefined} value="" />);
 });

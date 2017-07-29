@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import Article from './Article';
+import Header from './Header';
 
 it('renders without crashing', () => {
-  shallow(<Article onUpdate={() => undefined} />);
+  shallow(<Header onAdd={() => undefined} />);
 });

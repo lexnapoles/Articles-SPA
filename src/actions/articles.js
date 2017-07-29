@@ -1,4 +1,10 @@
-import { FETCH_ARTICLE_BY_ID, FETCH_ARTICLES, LOAD_ARTICLE } from '../constants/actionTypes';
+import {
+  ADD_ARTICLE,
+  DELETE_ARTICLE,
+  FETCH_ARTICLE_BY_ID,
+  FETCH_ARTICLES,
+  LOAD_ARTICLE, UPDATE_ARTICLE,
+} from '../constants/actionTypes';
 
 export const fetchArticles = () => ({
   type: FETCH_ARTICLES.REQUEST,
@@ -14,5 +20,26 @@ export const loadArticle = (id, requiredFields) => ({
   payload: {
     id,
     requiredFields,
+  },
+});
+
+export const deleteArticle = id => ({
+  type: DELETE_ARTICLE.REQUEST,
+  payload: {
+    id,
+  },
+});
+
+export const addArticle = article => ({
+  type: ADD_ARTICLE.REQUEST,
+  payload: {
+    article,
+  },
+});
+
+export const updateArticle = article => ({
+  type: UPDATE_ARTICLE.REQUEST,
+  payload: {
+    article,
   },
 });

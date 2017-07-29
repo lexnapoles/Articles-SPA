@@ -11,9 +11,9 @@ class ArticleContainer extends Component {
   }
 
   render() {
-    const { article } = this.props;
+    const { article, onUpdate } = this.props;
 
-    return <Article article={article} />;
+    return <Article article={article} onUpdate={onUpdate} />;
   }
 }
 

@@ -10,5 +10,10 @@ it('renders without crashing', () => {
     excerpt: 'excerpt',
   };
 
-  shallow(<ArticleOverview article={article} onClick={() => undefined} />);
+  shallow(<ArticleOverview
+    article={article}
+    onClick={() => undefined}
+    onDelete={() => undefined}
+    onUpdate={() => undefined}
+  />);
 });

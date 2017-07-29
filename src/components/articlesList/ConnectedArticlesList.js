@@ -2,6 +2,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { getAllArticles } from '../../selectors/articles';
 import ArticlesList from './ArticlesList';
+import { deleteArticle } from '../../actions/articles';
 
 const mapStateToProps = (state, { history }) => {
   const articles = getAllArticles(state);
@@ -9,7 +10,10 @@ const mapStateToProps = (state, { history }) => {
   return {
     articles,
     onClick: id => history.push(`/${id}`),
+    onUpdate: id => history.push(`/update/${id}`),
   };
 };
 
-export default withRouter(connect(mapStateToProps)(ArticlesList));
+export default withRouter(connect(mapStateToProps, {
+  onDelete: deleteArticle,
+})(ArticlesList));

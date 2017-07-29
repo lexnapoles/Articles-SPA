@@ -1,9 +1,15 @@
 import { all } from 'redux-saga/effects';
-import { watchFetchArticles, watchLoadArticle } from './articles';
+import {
+  watchAddArticle, watchDeleteArticle, watchFetchArticles, watchLoadArticle,
+  watchUpdateArticle,
+} from './articles';
 
 export default function* () {
   yield all([
     watchFetchArticles(),
     watchLoadArticle(),
+    watchAddArticle(),
+    watchDeleteArticle(),
+    watchUpdateArticle(),
   ]);
 }
