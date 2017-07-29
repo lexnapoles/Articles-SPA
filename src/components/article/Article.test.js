@@ -3,5 +3,5 @@ import { shallow } from 'enzyme';
 import Article from './Article';
 
 it('renders without crashing', () => {
-  shallow(<Article />);
+  shallow(<Article onUpdate={() => undefined} />);
 });

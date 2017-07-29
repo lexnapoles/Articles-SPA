@@ -14,7 +14,7 @@ const mapStateToProps = (state, { match, history }) => {
   const hasAllArticleKeys = hasAllFields(article, articleKeys);
 
   return {
-    article: hasAllArticleKeys ? article : null,
+    article: hasAllArticleKeys ? article : undefined,
     id,
     onUpdate: () => history.push(`/update/${id}`),
   };

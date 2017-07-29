@@ -24,10 +24,10 @@ const mapDispatchToProps = (dispatch, { history }) => {
 const mapStateToProps = (state, { match }) => {
   const { id } = match.params;
 
-  const article = getArticleById(state, id) || null;
+  const article = getArticleById(state, id);
 
   return {
-    article: hasAllFields(article, requiredFields) ? pick(article, requiredFields) : null,
+    article: hasAllFields(article, requiredFields) ? pick(article, requiredFields) : undefined,
     id,
   };
 };

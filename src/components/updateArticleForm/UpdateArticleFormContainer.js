@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { isEqual } from 'lodash/lang';
 import UpdateArticleForm from './UpdateArticleForm';
 import { updateFormPropType } from '../propTypes';
 
@@ -6,9 +7,13 @@ import { updateFormPropType } from '../propTypes';
 
 class UpdateArticleFormContainer extends Component {
   static getArticleWithCorrectTags(article) {
+    const { tags } = article;
+
+    const correctTags = Array.isArray(tags) ? tags.join(';') : tags;
+
     return {
       ...article,
-      tags: article.tags.join(';'),
+      tags: correctTags,
     };
   }
 
@@ -83,6 +88,18 @@ class UpdateArticleFormContainer extends Component {
     loadArticle(id);
   }
 
+  componentWillReceiveProps({ article }) {
+    if (isEqual(article, this.props)) {
+      return;
+    }
+
+    const { getArticleWithCorrectTags } = UpdateArticleFormContainer;
+
+    this.setState({
+      article: getArticleWithCorrectTags(article),
+    });
+  }
+
   onSubmit(event) {
     event.preventDefault();
 
@@ -136,11 +153,10 @@ UpdateArticleFormContainer.defaultProps = {
   article: {
     author: '',
     content: '',
-    tags: '',
+    tags: [''],
     title: '',
     published: false,
   },
 };
-
 
 export default UpdateArticleFormContainer;
