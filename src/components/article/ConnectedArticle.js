@@ -4,9 +4,9 @@ import ArticleContainer from './ArticleContainer';
 import { loadArticle } from '../../actions/articles';
 import { hasAllFields } from '../../../utils';
 
-const articleKeys = ['author', 'content', 'published', 'tags', 'title'];
+const articleKeys = ['id', 'author', 'content', 'published', 'tags', 'title'];
 
-const mapStateToProps = (state, { match }) => {
+const mapStateToProps = (state, { match, history }) => {
   const { id } = match.params;
 
   const article = getArticleById(state, id);
@@ -16,6 +16,7 @@ const mapStateToProps = (state, { match }) => {
   return {
     article: hasAllArticleKeys ? article : null,
     id,
+    onUpdate: () => history.push(`/update/${id}`),
   };
 };
 

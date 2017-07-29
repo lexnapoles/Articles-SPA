@@ -11,15 +11,17 @@ export const articleOverviewPropType = {
   article: singleArticleOverviewPropTypeShape,
   onClick: PropTypes.func.isRequired,
   onDelete: PropTypes.func.isRequired,
+  onUpdate: PropTypes.func.isRequired,
 };
 
 export const articlesListPropType = {
   articles: PropTypes.arrayOf(singleArticleOverviewPropTypeShape),
   onClick: PropTypes.func.isRequired,
   onDelete: PropTypes.func.isRequired,
+  onUpdate: PropTypes.func.isRequired,
 };
 
-export const singleArticlePropTypeShape = PropTypes.shape({
+export const articlePropTypeShape = PropTypes.shape({
   author: PropTypes.string.isRequired,
   content: PropTypes.string.isRequired,
   published: PropTypes.bool.isRequired,
@@ -27,10 +29,16 @@ export const singleArticlePropTypeShape = PropTypes.shape({
   title: PropTypes.string.isRequired,
 });
 
+export const articlePropType = {
+  article: articlePropTypeShape,
+  onUpdate: PropTypes.func.isRequired,
+};
+
 export const articleContainerPropType = {
-  article: singleArticlePropTypeShape,
+  article: articlePropTypeShape,
   id: PropTypes.string.isRequired,
   loadArticle: PropTypes.func.isRequired,
+  onUpdate: PropTypes.func.isRequired,
 };
 
 const formPropType = {

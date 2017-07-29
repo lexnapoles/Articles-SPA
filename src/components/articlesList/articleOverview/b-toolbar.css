@@ -3,6 +3,10 @@
     justify-content: flex-end;
 }
 
+.b-toolbar__item {
+    margin-left: .5rem;
+}
+
 .b-toolbar__item:hover {
     background: #C2C2C2;
     padding: .2rem;

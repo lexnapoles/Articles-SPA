@@ -8,6 +8,12 @@
     margin: 2rem 0;
 }
 
+.b-article__header {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+}
+
 .b-article__tag {
     font-size: small;
     margin-right: 1rem;

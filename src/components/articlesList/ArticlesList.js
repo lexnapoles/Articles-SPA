@@ -3,7 +3,7 @@ import { articlesListPropType } from '../propTypes';
 import ArticleOverview from './articleOverview/ArticleOverview';
 import './b-list.css';
 
-const ArticlesList = ({ articles, onClick, onDelete }) => (
+const ArticlesList = ({ articles, onClick, onDelete, onUpdate }) => (
   <div className="b-list" >
     {articles.map(article =>
       <ArticleOverview
@@ -11,6 +11,7 @@ const ArticlesList = ({ articles, onClick, onDelete }) => (
         article={article}
         onClick={() => onClick(article.id)}
         onDelete={() => onDelete(article.id)}
+        onUpdate={() => onUpdate(article.id)}
       />)}
   </div >
 );

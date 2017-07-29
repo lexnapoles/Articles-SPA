@@ -72,9 +72,6 @@ const addArticleInputType = new GraphQLInputObjectType({
     content: {
       type: GraphQLString,
     },
-    excerpt: {
-      type: GraphQLString,
-    },
     tags: {
       type: new GraphQLList(GraphQLString),
     },
@@ -130,7 +127,13 @@ const Mutation = new GraphQLObjectType({
         },
       },
       resolve(_, { article }) {
-        const newArticle = new db.Article({ ...article, published: false });
+        const articleData = {
+          ...article,
+          excerpt: getExcerpt(article),
+          published: false,
+        };
+
+        const newArticle = new db.Article(articleData);
 
         return newArticle.save();
       },
@@ -160,7 +163,9 @@ const Mutation = new GraphQLObjectType({
           excerpt: getExcerpt(article),
         };
 
-        return db.Article.findByIdAndUpdate(article.id, updatedArticle, { new: true });
+        const getUpdatedArticle = { new: true };
+
+        return db.Article.findByIdAndUpdate(article.id, updatedArticle, getUpdatedArticle);
       },
     },
   }),

@@ -1,20 +1,22 @@
 import React from 'react';
 import MdDeleteIcon from 'react-icons/lib/md/delete';
+import MdEditIcon from 'react-icons/lib/md/mode-edit';
 import { articleOverviewPropType } from '../../propTypes';
 import './b-toolbar.css';
 
-const ArticleOverview = ({ article, onClick, onDelete }) => {
+const ArticleOverview = ({ article, onClick, onDelete, onUpdate }) => {
   const { author, excerpt, title } = article;
 
-  const onDeleteHandler = event => {
+  const onHandler = handler => event => {
     event.stopPropagation();
-    onDelete();
+    handler();
   };
 
   return (
     <section className="b-list__item" onClick={onClick} >
       <div className="b-toolbar" >
-        <MdDeleteIcon className="b-toolbar__item" size={20} onClick={onDeleteHandler} />
+        <MdEditIcon className="b-toolbar__item" size={23} onClick={onHandler(onUpdate)} />
+        <MdDeleteIcon className="b-toolbar__item" size={23} onClick={onHandler(onDelete)} />
       </div >
       <h1 >{title}</h1 >
       <h2 >{author}</h2 >

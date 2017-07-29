@@ -10,6 +10,7 @@ const mapStateToProps = (state, { history }) => {
   return {
     articles,
     onClick: id => history.push(`/${id}`),
+    onUpdate: id => history.push(`/update/${id}`),
   };
 };
 

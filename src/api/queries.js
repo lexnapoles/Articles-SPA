@@ -43,6 +43,7 @@ mutation ($article: UpdateArticleInput!) {
     id
     author
     content
+    excerpt
     published
     tags
     title

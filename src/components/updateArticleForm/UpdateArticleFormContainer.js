@@ -1,14 +1,17 @@
 import React, { Component } from 'react';
-import { isEqual } from 'lodash/lang';
-import { pick } from 'lodash/object';
 import UpdateArticleForm from './UpdateArticleForm';
 import { updateFormPropType } from '../propTypes';
 
 // TODO: Refactor forms into a single Form HOC
 
-const requiredFields = ['id', 'author', 'content', 'published', 'tags', 'title'];
-
 class UpdateArticleFormContainer extends Component {
+  static getArticleWithCorrectTags(article) {
+    return {
+      ...article,
+      tags: article.tags.join(';'),
+    };
+  }
+
   static validateInput(value) {
     if (!value.length) {
       return 'This field cannot be empty';
@@ -56,14 +59,12 @@ class UpdateArticleFormContainer extends Component {
   constructor(props) {
     super(props);
 
+    const { getArticleWithCorrectTags } = UpdateArticleFormContainer;
+
+    const article = getArticleWithCorrectTags(this.props.article);
+
     this.state = {
-      article: {
-        author: '',
-        content: '',
-        tags: '',
-        title: '',
-        published: false,
-      },
+      article,
       errors: {
         author: '',
         content: '',
@@ -79,21 +80,7 @@ class UpdateArticleFormContainer extends Component {
   componentWillMount() {
     const { loadArticle, id } = this.props;
 
-    loadArticle(id, requiredFields);
-  }
-
-  componentWillReceiveProps({ article }) {
-    const isNotAnEmptyArticle = Object.keys(article).length;
-    const isNotTheSameArticle = !isEqual(this.state.article, article);
-
-    if (isNotAnEmptyArticle && isNotTheSameArticle) {
-      this.setState({
-        article: {
-          ...pick(article, requiredFields),
-          tags: article.tags.join(';'),
-        },
-      });
-    }
+    loadArticle(id);
   }
 
   onSubmit(event) {
@@ -145,5 +132,15 @@ class UpdateArticleFormContainer extends Component {
 }
 
 UpdateArticleFormContainer.propTypes = updateFormPropType;
+UpdateArticleFormContainer.defaultProps = {
+  article: {
+    author: '',
+    content: '',
+    tags: '',
+    title: '',
+    published: false,
+  },
+};
+
 
 export default UpdateArticleFormContainer;

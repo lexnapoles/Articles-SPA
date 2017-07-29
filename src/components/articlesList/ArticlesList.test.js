@@ -7,6 +7,7 @@ it('renders without crashing', () => {
     articles={[]}
     onClick={() => undefined}
     onDelete={() => undefined}
+    onUpdate={() => undefined}
   />);
 });
 

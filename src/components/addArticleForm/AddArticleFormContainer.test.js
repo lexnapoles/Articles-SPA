@@ -37,7 +37,6 @@ it('creates a submittable article before submitting', () => {
   expect(errors).toEqual({
     author: 'Author',
     content: 'Content',
-    excerpt: 'Content',
     title: 'Title',
     tags: ['tag1', 'tag2'],
   });
