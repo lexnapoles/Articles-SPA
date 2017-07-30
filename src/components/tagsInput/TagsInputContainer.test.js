@@ -1,5 +1,5 @@
 import React from 'react';
-import { shallow, mount } from 'enzyme';
+import { shallow } from 'enzyme';
 import TagsInputContainer from './TagsInputContainer';
 
 it('renders without crashing', () => {
@@ -41,4 +41,18 @@ it('updates the value of the input when it changes', () => {
   inputContainer.instance().onChange(event);
 
   expect(inputContainer.state('value')).toBe(inputValue);
+});
+
+it('adds the user tag to the tags', () => {
+  const inputContainer = shallow(<TagsInputContainer />);
+  const tag = 'Tag1';
+
+  inputContainer.setState({
+    tags: [],
+    value: tag,
+  });
+
+  inputContainer.instance().onAdd();
+
+  expect(inputContainer.state('tags')).toEqual([tag]);
 });

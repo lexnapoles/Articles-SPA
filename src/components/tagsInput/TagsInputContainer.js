@@ -21,6 +21,15 @@ class TagsInputContainer extends Component {
     });
   }
 
+  onAdd() {
+    const tag = this.state.value;
+    const previousTags = this.state.tags;
+
+    this.setState({
+      tags: [...previousTags, tag],
+    });
+  }
+
   render() {
     return <TagsInput tags={[]} value="" onChange={this.onChange} />;
   }
