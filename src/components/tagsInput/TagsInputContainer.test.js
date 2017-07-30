@@ -69,3 +69,15 @@ it('clears the input when the tag has been add', () => {
 
   expect(inputContainer.state('value')).toBe('');
 });
+
+it('deletes the last tag added when delete button is clicked', () => {
+  const inputContainer = shallow(<TagsInputContainer />);
+
+  inputContainer.setState({
+    tags: ['tag1', 'tag2'],
+  });
+
+  inputContainer.instance().onDelete(new MouseEvent('click'));
+
+  expect(inputContainer.state('tags')).toEqual(['tag1']);
+});

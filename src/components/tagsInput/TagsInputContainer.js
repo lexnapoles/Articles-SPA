@@ -22,10 +22,15 @@ class TagsInputContainer extends Component {
   }
 
   onAdd(event) {
-    console.log(event);
     event.preventDefault();
 
     this.addTag(this.state);
+  }
+
+  onDelete(event) {
+    event.preventDefault();
+
+    this.deleteLastTag();
   }
 
   addTag() {
@@ -36,6 +41,16 @@ class TagsInputContainer extends Component {
       value: '',
     });
   }
+
+  deleteLastTag() {
+    const { tags, value } = this.state;
+
+    this.setState({
+      tags: tags.slice(0, tags.length - 1),
+      value,
+    });
+  }
+
 
   render() {
     return <TagsInput tags={[]} value="" onChange={this.onChange} />;
