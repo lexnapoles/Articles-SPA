@@ -81,8 +81,8 @@ export const updateFormPropType = {
 };
 
 export const inputPropType = {
-  className: PropTypes.string.isRequired,
-  inputWrapperClassName: PropTypes.string.isRequired,
+  className: PropTypes.string,
+  inputWrapperClassName: PropTypes.string,
   invalidClassName: PropTypes.string,
   invalidLabelClassName: PropTypes.string,
   labelClassName: PropTypes.string,

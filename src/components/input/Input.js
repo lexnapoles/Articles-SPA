@@ -32,6 +32,7 @@ const Input = ({
 Input.propTypes = inputPropType;
 
 Input.defaultProps = {
+  className: '',
   inputWrapperClassName: '',
   invalidClassName: '',
   isInvalid: false,
