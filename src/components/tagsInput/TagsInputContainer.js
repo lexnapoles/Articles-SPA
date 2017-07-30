@@ -10,10 +10,19 @@ class TagsInputContainer extends Component {
       tags: props.tags,
       value: '',
     };
+
+    this.onChange = this.onChange.bind(this);
+  }
+
+  onChange(event) {
+    this.setState({
+      ...this.state,
+      value: event.target.value,
+    });
   }
 
   render() {
-    return <TagsInput onChange={() => undefined} tags={[]} value="" />;
+    return <TagsInput tags={[]} value="" onChange={this.onChange} />;
   }
 }
 
