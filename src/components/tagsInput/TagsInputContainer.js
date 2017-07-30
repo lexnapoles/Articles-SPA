@@ -21,12 +21,19 @@ class TagsInputContainer extends Component {
     });
   }
 
-  onAdd() {
-    const tag = this.state.value;
-    const previousTags = this.state.tags;
+  onAdd(event) {
+    console.log(event);
+    event.preventDefault();
+
+    this.addTag(this.state);
+  }
+
+  addTag() {
+    const { tags, value } = this.state;
 
     this.setState({
-      tags: [...previousTags, tag],
+      tags: [...tags, value],
+      value: '',
     });
   }
 

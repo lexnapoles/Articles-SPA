@@ -52,7 +52,20 @@ it('adds the user tag to the tags', () => {
     value: tag,
   });
 
-  inputContainer.instance().onAdd();
+  inputContainer.instance().onAdd(new MouseEvent('click'));
 
   expect(inputContainer.state('tags')).toEqual([tag]);
+});
+
+it('clears the input when the tag has been add', () => {
+  const inputContainer = shallow(<TagsInputContainer />);
+
+  inputContainer.setState({
+    tags: [],
+    value: 'Tag1',
+  });
+
+  inputContainer.instance().onAdd(new MouseEvent('click'));
+
+  expect(inputContainer.state('value')).toBe('');
 });
