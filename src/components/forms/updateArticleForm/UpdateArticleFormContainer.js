@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { isEqual } from 'lodash/lang';
 import UpdateArticleForm from './UpdateArticleForm';
-import { updateFormPropType } from '../propTypes';
+import { updateContainerFormPropType } from '../../propTypes';
 
 // TODO: Refactor forms into a single Form HOC
 
@@ -83,10 +83,10 @@ class UpdateArticleFormContainer extends Component {
     this.props.onSubmit(article);
   }
 
-  onInputChange(field, event) {
+  onInputChange(field, { target }) {
     const article = {
       ...this.state.article,
-      [field]: event.target.value,
+      [field]: target.type === 'checkbox' ? target.checked : target.value,
     };
 
     this.setState({
@@ -110,7 +110,7 @@ class UpdateArticleFormContainer extends Component {
     this.setState({
       errors,
     });
-  }
+  };
 
   render() {
     return (
@@ -120,13 +120,14 @@ class UpdateArticleFormContainer extends Component {
         onAuthorChange={event => this.onInputChange('author', event)}
         onContentChange={event => this.onInputChange('content', event)}
         onTitleChange={event => this.onInputChange('title', event)}
+        onPublishedChange={event => this.onInputChange('published', event)}
         onTagsChange={this.onTagsChange}
         onSubmit={this.onSubmit}
       />);
   }
 }
 
-UpdateArticleFormContainer.propTypes = updateFormPropType;
+UpdateArticleFormContainer.propTypes = updateContainerFormPropType;
 
 UpdateArticleFormContainer.defaultProps = {
   article: {

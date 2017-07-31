@@ -8,6 +8,7 @@ it('renders without crashing', () => {
     content: '',
     tags: [],
     title: '',
+    published: true,
   };
 
   const errors = {
@@ -26,6 +27,7 @@ it('renders without crashing', () => {
     onContentChange={placeholderFn}
     onTagsChange={placeholderFn}
     onTitleChange={placeholderFn}
+    onPublishedChange={placeholderFn}
     onSubmit={placeholderFn}
   />);
 });

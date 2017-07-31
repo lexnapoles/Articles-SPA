@@ -22,6 +22,7 @@ it('validates the article', () => {
     content: '',
     title: '',
     tags: [],
+    published: true,
   };
 
   const errors = UpdateArticleFormContainer.validateArticle(article);

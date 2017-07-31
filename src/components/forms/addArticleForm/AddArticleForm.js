@@ -1,9 +1,9 @@
 import React from 'react';
-import { articleFormPropType } from '../propTypes';
-import './b-form.css';
-import Input from '../inputs/input/Input';
-import TextArea from '../inputs/textArea/TextArea';
-import TagsInputContainer from '../inputs/tagsInput/TagsInputContainer';
+import { articleFormPropType } from '../../propTypes';
+import '../b-form.css';
+import Input from '../../inputs/input/Input';
+import TextArea from '../../inputs/textArea/TextArea';
+import TagsInputContainer from '../../inputs/tagsInput/TagsInputContainer';
 
 const AddArticleForm = ({
   article,

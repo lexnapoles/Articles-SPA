@@ -1,9 +1,9 @@
 import React from 'react';
-import { articleFormPropType } from '../propTypes';
-import '../addArticleForm/b-form.css';
-import Input from '../inputs/input/Input';
-import TextArea from '../inputs/textArea/TextArea';
-import TagsInputContainer from '../inputs/tagsInput/TagsInputContainer';
+import { updateFormPropType } from '../../propTypes';
+import '../b-form.css';
+import Input from '../../inputs/input/Input';
+import TextArea from '../../inputs/textArea/TextArea';
+import TagsInputContainer from '../../inputs/tagsInput/TagsInputContainer';
 
 const UpdateArticleForm = ({
   article,
@@ -12,6 +12,7 @@ const UpdateArticleForm = ({
   onContentChange,
   onTitleChange,
   onTagsChange,
+  onPublishedChange,
   onSubmit,
 }) => {
   const { author, title, content, tags } = article;
@@ -60,11 +61,18 @@ const UpdateArticleForm = ({
 
       <TagsInputContainer onChange={onTagsChange} tags={tags} styles={inputStyles} />
 
+      <div className="b-form__published-wrapper">
+        <label >Published &nbsp;
+          <input type="checkbox" checked={article.published} onChange={onPublishedChange} />
+        </label >
+      </div >
+
       <button className="b-form__submit-button" type="submit" >Update Article</button >
+
     </form >
   );
 };
 
-UpdateArticleForm.propTypes = articleFormPropType;
+UpdateArticleForm.propTypes = updateFormPropType;
 
 export default UpdateArticleForm;
