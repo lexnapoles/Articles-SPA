@@ -2,11 +2,7 @@ import React from 'react';
 import { inputPropType } from '../propTypes';
 
 const TextArea = ({
-  className,
-  inputWrapperClassName,
-  invalidClassName,
-  invalidLabelClassName,
-  labelClassName,
+  styles,
   title,
   placeholder,
   value,
@@ -16,15 +12,15 @@ const TextArea = ({
   const hasError = error.length;
 
   return (
-    <div className={inputWrapperClassName} >
-      {title ? <label className={labelClassName} >{title}</label > : ''}
+    <div className={styles.inputWrapperClassName} >
+      {title ? <label className={styles.labelClassName} >{title}</label > : ''}
       <textArea
-        className={!hasError ? className : `${className} ${invalidClassName}`}
+        className={!hasError ? styles.className : styles.invalidClassName}
         placeholder={placeholder}
         value={value}
         onChange={onChange}
       />
-      {hasError ? <label className={`${labelClassName} ${invalidLabelClassName}`} >{error}</label > : ''}
+      {hasError ? <label className={styles.invalidLabelClassName} >{error}</label > : ''}
     </div >
   );
 };
@@ -32,13 +28,13 @@ const TextArea = ({
 TextArea.propTypes = inputPropType;
 
 TextArea.defaultProps = {
-  inputWrapperClassName: '',
-  invalidClassName: '',
-  isInvalid: false,
-  placeholder: '',
+  styles: {
+    inputWrapperClassName: '',
+    invalidClassName: '',
+    invalidLabelClassName: '',
+    labelClassName: '',
+  },
   error: '',
-  invalidLabelClassName: '',
-  labelClassName: '',
 };
 
 export default TextArea;

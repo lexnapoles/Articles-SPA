@@ -5,21 +5,6 @@ import Input from '../input/Input';
 import TextArea from '../TextArea/TextArea';
 import TagsInputContainer from '../tagsInput/TagsInputContainer';
 
-// TODO: Replace tags input with a intuitive way to add tags.
-
-/* <Input
-  className={inputClassName}
-  wrapperClassName={inputWrapperClassName}
-  invalidClassName={invalidClassName}
-  invalidLabelClassName={invalidLabelClassName}
-  error={errors.tags}
-  placeholder="tag1 or tag1;tag2"
-  value={tags}
-  onChange={onTagsChange}
-/>
-*/
-
-
 const AddArticleForm = ({
   article,
   errors,
@@ -31,18 +16,18 @@ const AddArticleForm = ({
 }) => {
   const { author, title, content, tags } = article;
 
-  const inputClassName = 'b-form__input';
-  const inputWrapperClassName = 'b-form__input-wrapper';
-  const invalidClassName = 'b-form__input_invalid';
-  const invalidLabelClassName = 'b-form__label b-form__label_invalid';
+  const inputStyles = {
+    className: 'b-form__input',
+    invalidClassName: 'b-form__input b-form__input_invalid',
+    wrapperClassName: 'b-form__input-wrapper',
+    labelClassName: 'b-form__label',
+    invalidLabelClassName: 'b-form__label b-form__label_invalid',
+  };
 
   return (
     <form className="b-form" onSubmit={onSubmit} >
       <Input
-        className={inputClassName}
-        wrapperClassName={inputWrapperClassName}
-        invalidClassName={invalidClassName}
-        invalidLabelClassName={invalidLabelClassName}
+        styles={inputStyles}
         error={errors.title}
         placeholder="Title"
         value={title}
@@ -50,10 +35,7 @@ const AddArticleForm = ({
       />
 
       <Input
-        className={inputClassName}
-        wrapperClassName={inputWrapperClassName}
-        invalidClassName={invalidClassName}
-        invalidLabelClassName={invalidLabelClassName}
+        styles={inputStyles}
         error={errors.author}
         placeholder="Author"
         value={author}
@@ -61,10 +43,7 @@ const AddArticleForm = ({
       />
 
       <TextArea
-        className={inputClassName}
-        wrapperClassName={inputWrapperClassName}
-        invalidClassName={invalidClassName}
-        invalidLabelClassName={invalidLabelClassName}
+        styles={inputStyles}
         error={errors.content}
         placeholder="Content"
         value={content}

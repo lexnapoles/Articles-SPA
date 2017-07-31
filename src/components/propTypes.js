@@ -79,16 +79,40 @@ export const updateFormPropType = {
   loadArticle: PropTypes.func.isRequired,
 };
 
-export const inputPropType = {
+export const inputStylesPropType = {
   className: PropTypes.string,
   inputWrapperClassName: PropTypes.string,
   invalidClassName: PropTypes.string,
   invalidLabelClassName: PropTypes.string,
   labelClassName: PropTypes.string,
+};
+
+export const inputPropType = {
   title: PropTypes.string,
+  styles: PropTypes.shape(inputStylesPropType),
   error: PropTypes.string,
   onChange: PropTypes.func.isRequired,
   placeholder: PropTypes.string,
   value: PropTypes.string.isRequired,
 };
+
+const TagsInputStyles = {
+  ...inputStylesPropType,
+  buttonClassName: PropTypes.string,
+  tagsClassName: PropTypes.string,
+  tagsContainerClassName: PropTypes.string,
+};
+
+export const tagsInputPropTypes = {
+  error: PropTypes.string,
+  inputStyles: PropTypes.shape(inputStylesPropType),
+  onAdd: PropTypes.func.isRequired,
+  onChange: PropTypes.func.isRequired,
+  onDelete: PropTypes.func.isRequired,
+  styles: PropTypes.shape(TagsInputStyles),
+  tags: PropTypes.arrayOf(PropTypes.string).isRequired,
+  title: PropTypes.string,
+  value: PropTypes.string.isRequired,
+};
+
 

@@ -1,52 +1,48 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import MdAddIcon from 'react-icons/lib/md/add';
 import MdDeleteIcon from 'react-icons/lib/md/delete';
 import Input from '../input/Input';
+import { tagsInputPropTypes } from '../propTypes';
 
 const TagsInput = ({
-  className,
-  labelClassName,
-  tagsContainerClassName,
-  tagsClassName,
-  inputWrapperClassName,
-  buttonClassName,
+  title,
+  error,
+  styles,
+  inputStyles,
   tags,
   value,
   onChange,
   onAdd,
   onDelete,
-  ...inputProps
-}) =>
-  <div className={className} >
-    <label className={labelClassName} >Tags</label >
-    <div className={tagsContainerClassName} >
-      {tags.map(tag => <div key={tag} className={tagsClassName} >{tag}</div >)}
-    </div >
-    <div className={inputWrapperClassName} >
-      <Input value={value} placeholder="Article tags" onChange={onChange} {...inputProps} />
-      <MdAddIcon className={buttonClassName} onClick={onAdd} />
-      <MdDeleteIcon className={buttonClassName} onClick={onDelete} />
-    </div >
-  </div >;
+}) => {
+  const hasError = error.length;
 
-TagsInput.propTypes = {
-  buttonClassName: PropTypes.string,
-  className: PropTypes.string,
-  error: PropTypes.string,
-  inputWrapperClassName: PropTypes.string,
-  invalidClassName: PropTypes.string,
-  invalidLabelClassName: PropTypes.string,
-  labelClassName: PropTypes.string,
-  onAdd: PropTypes.func.isRequired,
-  onChange: PropTypes.func.isRequired,
-  onDelete: PropTypes.func.isRequired,
-  tags: PropTypes.arrayOf(PropTypes.string).isRequired,
-  tagsClassName: PropTypes.string,
-  tagsContainerClassName: PropTypes.string,
-  title: PropTypes.string,
-  value: PropTypes.string.isRequired,
-  wrapperClassName: PropTypes.string,
+  return (
+    <div className={!hasError ? styles.className : styles.invalidClassName} >
+      <label className={styles.labelClassName} >{title}</label >
+      <div className={styles.tagsContainerClassName} >
+        {tags.map(tag => <div key={tag} className={styles.tagsClassName} >{tag}</div >)}
+      </div >
+      <div className={styles.inputWrapperClassName} >
+        <Input value={value} placeholder="Article tags" onChange={onChange} {...inputStyles} />
+        <MdAddIcon className={styles.buttonClassName} onClick={onAdd} />
+        <MdDeleteIcon className={styles.buttonClassName} onClick={onDelete} />
+      </div >
+      {hasError ? <label className={styles.invalidLabelClassName} >{error}</label > : ''}
+    </div >
+  );
+};
+
+TagsInput.propTypes = tagsInputPropTypes;
+
+TagsInput.defaultProps = {
+  styles: {
+    inputWrapperClassName: '',
+    invalidClassName: '',
+    invalidLabelClassName: '',
+    labelClassName: '',
+  },
+  error: '',
 };
 
 export default TagsInput;

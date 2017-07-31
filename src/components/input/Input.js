@@ -2,11 +2,7 @@ import React from 'react';
 import { inputPropType } from '../propTypes';
 
 const Input = ({
-  className,
-  inputWrapperClassName,
-  invalidClassName,
-  invalidLabelClassName,
-  labelClassName,
+  styles,
   title,
   placeholder,
   value,
@@ -16,15 +12,15 @@ const Input = ({
   const hasError = error.length;
 
   return (
-    <div className={inputWrapperClassName} >
-      {title ? <label className={labelClassName} >{title}</label > : ''}
+    <div className={styles.inputWrapperClassName} >
+      {title ? <label className={styles.labelClassName} >{title}</label > : ''}
       <input
-        className={!hasError ? className : `${className} ${invalidClassName}`}
+        className={!hasError ? styles.className : styles.invalidClassName}
         placeholder={placeholder}
         value={value}
         onChange={onChange}
       />
-      {hasError ? <label className={`${labelClassName} ${invalidLabelClassName}`} >{error}</label > : ''}
+      {hasError ? <label className={styles.invalidLabelClassName} >{error}</label > : ''}
     </div >
   );
 };
@@ -32,14 +28,13 @@ const Input = ({
 Input.propTypes = inputPropType;
 
 Input.defaultProps = {
-  className: '',
-  inputWrapperClassName: '',
-  invalidClassName: '',
-  isInvalid: false,
-  placeholder: '',
+  styles: {
+    inputWrapperClassName: '',
+    invalidClassName: '',
+    invalidLabelClassName: '',
+    labelClassName: '',
+  },
   error: '',
-  invalidLabelClassName: '',
-  labelClassName: '',
 };
 
 export default Input;
