@@ -2,34 +2,39 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import TagsInputContainer from './TagsInputContainer';
 
+const defaultState = {
+  onchange: () => undefined,
+};
+
+const getTagsInputContainer = ({ tags, onChange = () => undefined } = defaultState) =>
+  shallow(<TagsInputContainer tags={tags} onChange={onChange} />);
+
 it('renders without crashing', () => {
-  shallow(<TagsInputContainer tags={['']} />);
+  shallow(<TagsInputContainer onChange={() => undefined} />);
 });
 
-it('uses the tags received by props as state', () => {
+it('sets the tags state with the tags prop', () => {
   const tags = ['tag1', 'tag2'];
+  const tagsInput = getTagsInputContainer({ tags });
 
-  const input = shallow(<TagsInputContainer tags={tags} />);
-
-  expect(input.state('tags')).toEqual(tags);
+  expect(tagsInput.state('tags')).toEqual(tags);
 });
 
 it('uses the default tags as state if no tags has been received', () => {
   const tags = undefined;
+  const tagsInput = getTagsInputContainer({ tags });
 
-  const input = shallow(<TagsInputContainer tags={tags} />);
-
-  expect(input.state('tags')).toEqual([]);
+  expect(tagsInput.state('tags')).toEqual([]);
 });
 
 it('keeps the input value in the state', () => {
-  const input = shallow(<TagsInputContainer />);
+  const tagsInput = getTagsInputContainer();
 
-  expect(input.state('value')).toBe('');
+  expect(tagsInput.state('value')).toBe('');
 });
 
 it('updates the value of the input when it changes', () => {
-  const inputContainer = shallow(<TagsInputContainer />);
+  const tagsInput = getTagsInputContainer();
   const inputValue = 'a value';
 
   const event = {
@@ -38,46 +43,87 @@ it('updates the value of the input when it changes', () => {
     },
   };
 
-  inputContainer.instance().onChange(event);
+  tagsInput.instance().inputHandler(event);
 
-  expect(inputContainer.state('value')).toBe(inputValue);
+  expect(tagsInput.state('value')).toBe(inputValue);
 });
 
-it('adds the user tag to the tags', () => {
-  const inputContainer = shallow(<TagsInputContainer />);
+it('saves the new tag', () => {
+  const tagsInput = getTagsInputContainer();
   const tag = 'Tag1';
 
-  inputContainer.setState({
+  tagsInput.setState({
     tags: [],
     value: tag,
   });
 
-  inputContainer.instance().onAdd(new MouseEvent('click'));
+  tagsInput.instance().onAdd(new MouseEvent('click'));
 
-  expect(inputContainer.state('tags')).toEqual([tag]);
+  expect(tagsInput.state('tags')).toEqual([tag]);
 });
 
-it('clears the input when the tag has been add', () => {
-  const inputContainer = shallow(<TagsInputContainer />);
+it('clears the input when the tag has been added', () => {
+  const tagsInput = getTagsInputContainer();
 
-  inputContainer.setState({
+  tagsInput.setState({
     tags: [],
     value: 'Tag1',
   });
 
-  inputContainer.instance().onAdd(new MouseEvent('click'));
+  tagsInput.instance().onAdd(new MouseEvent('click'));
 
-  expect(inputContainer.state('value')).toBe('');
+  expect(tagsInput.state('value')).toBe('');
 });
 
-it('deletes the last tag added when delete button is clicked', () => {
-  const inputContainer = shallow(<TagsInputContainer />);
+it('deletes the last tag added when the delete button is clicked', () => {
+  const tagsInput = getTagsInputContainer();
 
-  inputContainer.setState({
+  tagsInput.setState({
     tags: ['tag1', 'tag2'],
   });
 
-  inputContainer.instance().onDelete(new MouseEvent('click'));
+  tagsInput.instance().onDelete(new MouseEvent('click'));
 
-  expect(inputContainer.state('tags')).toEqual(['tag1']);
+  expect(tagsInput.state('tags')).toEqual(['tag1']);
 });
+
+it('does not add a tag if it already exists', () => {
+  const tagsInput = getTagsInputContainer();
+  const tags = ['tag1', 'tag2'];
+
+  tagsInput.setState({
+    tags,
+    value: 'tag1',
+  });
+
+  tagsInput.instance().onAdd(new MouseEvent('click'));
+
+  expect(tagsInput.state('tags')).toEqual(tags);
+});
+
+it('gives the tags when they change', () => {
+  const tags = ['tag1', 'tag2'];
+  const receivedTags = [];
+  const onChange = data => receivedTags.push(...data);
+  const tagsInput = getTagsInputContainer({ onChange });
+
+  tagsInput.setState({
+    tags,
+  });
+
+  tagsInput.instance().onChange();
+
+  expect(receivedTags).toEqual(tags);
+});
+
+it('only re-renders with new state', () => {
+  const firstTags = ['tag1', 'tag2'];
+  const secondTags = ['tag3', 'tag4'];
+
+  const tagsInput = getTagsInputContainer({ tags: firstTags });
+
+  tagsInput.setProps({ tags: secondTags });
+
+  expect(tagsInput.state('tags')).toEqual(firstTags);
+});
+
