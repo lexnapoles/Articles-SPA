@@ -6,7 +6,7 @@ it('renders without crashing', () => {
   const article = {
     author: '',
     content: '',
-    tags: '',
+    tags: [''],
     title: '',
   };
 

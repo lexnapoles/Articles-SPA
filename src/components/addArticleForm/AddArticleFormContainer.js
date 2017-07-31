@@ -11,24 +11,15 @@ class AddArticleFormContainer extends Component {
     return '';
   }
 
-  static validateTags(tags) {
-    // Tags Format: a super-co`ol tag 1;tag2;tag3 || tag1
-    const tagsFormat = /^(([\S]+[^\s];)+)?((([ \S])+)[^\s;])$/ig;
-
-    const invalidTagFormat = !tags.match(tagsFormat);
-
-    return tags.length && invalidTagFormat ? 'Invalid tags format: tag1;tag2' : '';
-  }
-
   static validateArticle(article) {
-    const { validateInput, validateTags } = AddArticleFormContainer;
-    const { author, title, content, tags } = article;
+    const { validateInput } = AddArticleFormContainer;
+    const { author, title, content } = article;
 
     return {
       author: validateInput(author),
       title: validateInput(title),
       content: validateInput(content),
-      tags: validateTags(tags),
+      tags: '',
     };
   }
 
@@ -38,15 +29,6 @@ class AddArticleFormContainer extends Component {
     return keys.some(key => errors[key].length);
   }
 
-  static getSubmittableArticle(article) {
-    const tags = article.tags.split(';');
-
-    return {
-      ...article,
-      tags,
-    };
-  }
-
   constructor(props) {
     super(props);
 
@@ -54,7 +36,7 @@ class AddArticleFormContainer extends Component {
       article: {
         author: '',
         content: '',
-        tags: '',
+        tags: [''],
         title: '',
       },
       errors: {
@@ -66,6 +48,7 @@ class AddArticleFormContainer extends Component {
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleTagsChange = this.handleTagsChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
   }
 
@@ -73,7 +56,7 @@ class AddArticleFormContainer extends Component {
     event.preventDefault();
 
     const { article } = this.state;
-    const { validateArticle, errorsExist, getSubmittableArticle } = AddArticleFormContainer;
+    const { validateArticle, errorsExist } = AddArticleFormContainer;
 
     const errors = validateArticle(article);
 
@@ -83,7 +66,7 @@ class AddArticleFormContainer extends Component {
       return;
     }
 
-    this.props.onSubmit(getSubmittableArticle(article));
+    this.props.onSubmit(article);
   }
 
   addErrors(errors) {
@@ -103,6 +86,18 @@ class AddArticleFormContainer extends Component {
     });
   }
 
+  handleTagsChange(tags) {
+    const { article: previousArticle } = this.state;
+
+    this.setState({
+      article: {
+        ...previousArticle,
+        tags,
+
+      },
+    });
+  }
+
   render() {
     return (
       <AddArticleForm
@@ -111,7 +106,7 @@ class AddArticleFormContainer extends Component {
         onAuthorChange={event => this.handleInputChange('author', event)}
         onContentChange={event => this.handleInputChange('content', event)}
         onTitleChange={event => this.handleInputChange('title', event)}
-        onTagsChange={event => this.handleInputChange('tags', event)}
+        onTagsChange={this.handleTagsChange}
         onSubmit={this.onSubmit}
       />);
   }

@@ -111,19 +111,7 @@ it('gives the tags when they change', () => {
     tags,
   });
 
-  tagsInput.instance().onChange();
+  tagsInput.instance().onChange(tags);
 
   expect(receivedTags).toEqual(tags);
 });
-
-it('only re-renders with new state', () => {
-  const firstTags = ['tag1', 'tag2'];
-  const secondTags = ['tag3', 'tag4'];
-
-  const tagsInput = getTagsInputContainer({ tags: firstTags });
-
-  tagsInput.setProps({ tags: secondTags });
-
-  expect(tagsInput.state('tags')).toEqual(firstTags);
-});
-

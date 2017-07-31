@@ -3,8 +3,22 @@ import { articleFormPropType } from '../propTypes';
 import './b-form.css';
 import Input from '../input/Input';
 import TextArea from '../TextArea/TextArea';
+import TagsInputContainer from '../tagsInput/TagsInputContainer';
 
 // TODO: Replace tags input with a intuitive way to add tags.
+
+/* <Input
+  className={inputClassName}
+  wrapperClassName={inputWrapperClassName}
+  invalidClassName={invalidClassName}
+  invalidLabelClassName={invalidLabelClassName}
+  error={errors.tags}
+  placeholder="tag1 or tag1;tag2"
+  value={tags}
+  onChange={onTagsChange}
+/>
+*/
+
 
 const AddArticleForm = ({
   article,
@@ -57,16 +71,7 @@ const AddArticleForm = ({
         onChange={onContentChange}
       />
 
-      <Input
-        className={inputClassName}
-        wrapperClassName={inputWrapperClassName}
-        invalidClassName={invalidClassName}
-        invalidLabelClassName={invalidLabelClassName}
-        error={errors.tags}
-        placeholder="tag1 or tag1;tag2"
-        value={tags}
-        onChange={onTagsChange}
-      />
+      <TagsInputContainer tags={tags} onChange={onTagsChange} />
 
       <button type="submit" >Add Article</button >
     </form >

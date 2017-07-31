@@ -6,17 +6,6 @@ import { updateFormPropType } from '../propTypes';
 // TODO: Refactor forms into a single Form HOC
 
 class UpdateArticleFormContainer extends Component {
-  static getArticleWithCorrectTags(article) {
-    const { tags } = article;
-
-    const correctTags = Array.isArray(tags) ? tags.join(';') : tags;
-
-    return {
-      ...article,
-      tags: correctTags,
-    };
-  }
-
   static validateInput(value) {
     if (!value.length) {
       return 'This field cannot be empty';
@@ -25,24 +14,15 @@ class UpdateArticleFormContainer extends Component {
     return '';
   }
 
-  static validateTags(tags) {
-    // Tags Format: a super-co`ol tag 1;tag2;tag3 || tag1
-    const tagsFormat = /^(([\S]+[^\s];)+)?((([ \S])+)[^\s;])$/ig;
-
-    const invalidTagFormat = !tags.match(tagsFormat);
-
-    return tags.length && invalidTagFormat ? 'Invalid tags format: tag1;tag2' : '';
-  }
-
   static validateArticle(article) {
-    const { validateInput, validateTags } = UpdateArticleFormContainer;
-    const { author, title, content, tags } = article;
+    const { validateInput } = UpdateArticleFormContainer;
+    const { author, title, content } = article;
 
     return {
       author: validateInput(author),
       title: validateInput(title),
       content: validateInput(content),
-      tags: validateTags(tags),
+      tags: '',
     };
   }
 
@@ -52,24 +32,11 @@ class UpdateArticleFormContainer extends Component {
     return keys.some(key => errors[key].length);
   }
 
-  static getSubmittableArticle(article) {
-    const tags = article.tags.split(';');
-
-    return {
-      ...article,
-      tags,
-    };
-  }
-
   constructor(props) {
     super(props);
 
-    const { getArticleWithCorrectTags } = UpdateArticleFormContainer;
-
-    const article = getArticleWithCorrectTags(this.props.article);
-
     this.state = {
-      article,
+      article: this.props.article,
       errors: {
         author: '',
         content: '',
@@ -79,6 +46,7 @@ class UpdateArticleFormContainer extends Component {
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleTagsChange = this.handleTagsChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
   }
 
@@ -93,10 +61,8 @@ class UpdateArticleFormContainer extends Component {
       return;
     }
 
-    const { getArticleWithCorrectTags } = UpdateArticleFormContainer;
-
     this.setState({
-      article: getArticleWithCorrectTags(article),
+      article,
     });
   }
 
@@ -104,7 +70,7 @@ class UpdateArticleFormContainer extends Component {
     event.preventDefault();
 
     const { article } = this.state;
-    const { validateArticle, errorsExist, getSubmittableArticle } = UpdateArticleFormContainer;
+    const { validateArticle, errorsExist } = UpdateArticleFormContainer;
 
     const errors = validateArticle(article);
 
@@ -114,12 +80,21 @@ class UpdateArticleFormContainer extends Component {
       return;
     }
 
-    this.props.onSubmit(getSubmittableArticle(article));
+    this.props.onSubmit(article);
   }
 
   addErrors(errors) {
     this.setState({
       errors,
+    });
+  }
+
+  handleTags(tags) {
+    this.setState({
+      article: {
+        ...this.state.article,
+        tags,
+      },
     });
   }
 
@@ -131,6 +106,18 @@ class UpdateArticleFormContainer extends Component {
 
     this.setState({
       article,
+    });
+  }
+
+  handleTagsChange(tags) {
+    const { article: previousArticle } = this.state;
+
+    this.setState({
+      article: {
+        ...previousArticle,
+        tags,
+
+      },
     });
   }
 
@@ -149,6 +136,7 @@ class UpdateArticleFormContainer extends Component {
 }
 
 UpdateArticleFormContainer.propTypes = updateFormPropType;
+
 UpdateArticleFormContainer.defaultProps = {
   article: {
     author: '',
