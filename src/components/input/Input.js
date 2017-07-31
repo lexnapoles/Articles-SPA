@@ -1,5 +1,6 @@
 import React from 'react';
 import { inputPropType } from '../propTypes';
+import BaseInput from '../inputs/BaseInput';
 
 const Input = ({
   styles,
@@ -12,16 +13,14 @@ const Input = ({
   const hasError = error.length;
 
   return (
-    <div className={styles.inputWrapperClassName} >
-      {title ? <label className={styles.labelClassName} >{title}</label > : ''}
+    <BaseInput title={title} styles={styles} error={error}>
       <input
         className={!hasError ? styles.className : styles.invalidClassName}
         placeholder={placeholder}
         value={value}
         onChange={onChange}
       />
-      {hasError ? <label className={styles.invalidLabelClassName} >{error}</label > : ''}
-    </div >
+    </BaseInput >
   );
 };
 
@@ -29,10 +28,7 @@ Input.propTypes = inputPropType;
 
 Input.defaultProps = {
   styles: {
-    inputWrapperClassName: '',
     invalidClassName: '',
-    invalidLabelClassName: '',
-    labelClassName: '',
   },
   error: '',
 };

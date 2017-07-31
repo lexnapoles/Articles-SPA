@@ -81,10 +81,7 @@ export const updateFormPropType = {
 
 export const inputStylesPropType = {
   className: PropTypes.string,
-  inputWrapperClassName: PropTypes.string,
   invalidClassName: PropTypes.string,
-  invalidLabelClassName: PropTypes.string,
-  labelClassName: PropTypes.string,
 };
 
 export const inputPropType = {
@@ -115,4 +112,16 @@ export const tagsInputPropTypes = {
   value: PropTypes.string.isRequired,
 };
 
+const baseInputStylesPropTypes = {
+  wrapperClassName: PropTypes.string,
+  invalidWrapperClassName: PropTypes.string,
+  invalidLabelClassName: PropTypes.string,
+  labelClassName: PropTypes.string,
+};
 
+export const baseInputPropTypes = {
+  title: PropTypes.string,
+  styles: PropTypes.shape(baseInputStylesPropTypes),
+  error: PropTypes.string,
+  children: PropTypes.node.isRequired,
+};
