@@ -44,7 +44,7 @@ export const articleContainerPropType = {
 const formPropType = {
   author: PropTypes.string.isRequired,
   content: PropTypes.string.isRequired,
-  tags: PropTypes.PropTypes.string.isRequired,
+  tags: PropTypes.arrayOf(PropTypes.string).isRequired,
   title: PropTypes.string.isRequired,
 };
 
@@ -69,7 +69,6 @@ export const articleFormPropType = {
 
 const updateArticlePropTypeShape = PropTypes.shape({
   ...formPropType,
-  tags: PropTypes.arrayOf(PropTypes.string).isRequired,
   published: PropTypes.bool.isRequired,
 });
 
@@ -80,16 +79,47 @@ export const updateFormPropType = {
   loadArticle: PropTypes.func.isRequired,
 };
 
-export const inputPropType = {
-  className: PropTypes.string.isRequired,
-  inputWrapperClassName: PropTypes.string.isRequired,
+export const inputStylesPropType = {
+  className: PropTypes.string,
   invalidClassName: PropTypes.string,
-  invalidLabelClassName: PropTypes.string,
-  labelClassName: PropTypes.string,
+};
+
+export const inputPropType = {
   title: PropTypes.string,
+  styles: PropTypes.shape(inputStylesPropType),
   error: PropTypes.string,
   onChange: PropTypes.func.isRequired,
   placeholder: PropTypes.string,
   value: PropTypes.string.isRequired,
 };
 
+const TagsInputStyles = {
+  ...inputStylesPropType,
+  buttonClassName: PropTypes.string,
+};
+
+export const tagsInputPropTypes = {
+  error: PropTypes.string,
+  inputStyles: PropTypes.shape(inputStylesPropType),
+  onAdd: PropTypes.func.isRequired,
+  onChange: PropTypes.func.isRequired,
+  onDelete: PropTypes.func.isRequired,
+  styles: PropTypes.shape(TagsInputStyles),
+  tags: PropTypes.arrayOf(PropTypes.string).isRequired,
+  title: PropTypes.string,
+  value: PropTypes.string.isRequired,
+};
+
+const baseInputStylesPropTypes = {
+  wrapperClassName: PropTypes.string,
+  invalidWrapperClassName: PropTypes.string,
+  invalidLabelClassName: PropTypes.string,
+  labelClassName: PropTypes.string,
+};
+
+export const baseInputPropTypes = {
+  title: PropTypes.string,
+  styles: PropTypes.shape(baseInputStylesPropTypes),
+  error: PropTypes.string,
+  children: PropTypes.node.isRequired,
+};

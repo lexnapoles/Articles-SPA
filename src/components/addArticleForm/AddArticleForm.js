@@ -1,10 +1,9 @@
 import React from 'react';
 import { articleFormPropType } from '../propTypes';
 import './b-form.css';
-import Input from '../input/Input';
-import TextArea from '../TextArea/TextArea';
-
-// TODO: Replace tags input with a intuitive way to add tags.
+import Input from '../inputs/input/Input';
+import TextArea from '../inputs/textArea/TextArea';
+import TagsInputContainer from '../inputs/tagsInput/TagsInputContainer';
 
 const AddArticleForm = ({
   article,
@@ -17,18 +16,25 @@ const AddArticleForm = ({
 }) => {
   const { author, title, content, tags } = article;
 
-  const inputClassName = 'b-form__input';
-  const inputWrapperClassName = 'b-form__input-wrapper';
-  const invalidClassName = 'b-form__input_invalid';
-  const invalidLabelClassName = 'b-form__label b-form__label_invalid';
+  const inputClassName = 'b-form__base-input b-form__input';
+
+  const inputStyles = {
+    className: inputClassName,
+    invalidClassName: `${inputClassName} b-form__input_invalid`,
+    wrapperClassName: 'b-form__input-wrapper',
+    labelClassName: 'b-form__label',
+    invalidLabelClassName: 'b-form__label b-form__label_invalid',
+  };
+
+  const textAreaStyles = {
+    ...inputStyles,
+    className: 'b-form__base-input b-form__text',
+  };
 
   return (
     <form className="b-form" onSubmit={onSubmit} >
       <Input
-        className={inputClassName}
-        wrapperClassName={inputWrapperClassName}
-        invalidClassName={invalidClassName}
-        invalidLabelClassName={invalidLabelClassName}
+        styles={inputStyles}
         error={errors.title}
         placeholder="Title"
         value={title}
@@ -36,10 +42,7 @@ const AddArticleForm = ({
       />
 
       <Input
-        className={inputClassName}
-        wrapperClassName={inputWrapperClassName}
-        invalidClassName={invalidClassName}
-        invalidLabelClassName={invalidLabelClassName}
+        styles={inputStyles}
         error={errors.author}
         placeholder="Author"
         value={author}
@@ -47,28 +50,16 @@ const AddArticleForm = ({
       />
 
       <TextArea
-        className={inputClassName}
-        wrapperClassName={inputWrapperClassName}
-        invalidClassName={invalidClassName}
-        invalidLabelClassName={invalidLabelClassName}
+        styles={textAreaStyles}
         error={errors.content}
         placeholder="Content"
         value={content}
         onChange={onContentChange}
       />
 
-      <Input
-        className={inputClassName}
-        wrapperClassName={inputWrapperClassName}
-        invalidClassName={invalidClassName}
-        invalidLabelClassName={invalidLabelClassName}
-        error={errors.tags}
-        placeholder="tag1 or tag1;tag2"
-        value={tags}
-        onChange={onTagsChange}
-      />
+      <TagsInputContainer tags={tags} onChange={onTagsChange}  />
 
-      <button type="submit" >Add Article</button >
+      <button className="b-form__submit-button" type="submit" >Add Article</button >
     </form >
   );
 };
