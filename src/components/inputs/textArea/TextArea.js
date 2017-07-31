@@ -1,6 +1,6 @@
 import React from 'react';
-import { inputPropType } from '../propTypes';
-import BaseInput from '../inputs/BaseInput';
+import { inputPropType } from '../../propTypes';
+import BaseInput from '../BaseInput';
 
 const TextArea = ({
   styles,

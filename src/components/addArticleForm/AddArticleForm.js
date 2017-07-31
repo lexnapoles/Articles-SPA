@@ -1,9 +1,9 @@
 import React from 'react';
 import { articleFormPropType } from '../propTypes';
 import './b-form.css';
-import Input from '../input/Input';
-import TextArea from '../TextArea/TextArea';
-import TagsInputContainer from '../tagsInput/TagsInputContainer';
+import Input from '../inputs/input/Input';
+import TextArea from '../inputs/textArea/TextArea';
+import TagsInputContainer from '../inputs/tagsInput/TagsInputContainer';
 
 const AddArticleForm = ({
   article,
@@ -16,12 +16,19 @@ const AddArticleForm = ({
 }) => {
   const { author, title, content, tags } = article;
 
+  const inputClassName = 'b-form__base-input b-form__input';
+
   const inputStyles = {
-    className: 'b-form__input',
-    invalidClassName: 'b-form__input b-form__input_invalid',
+    className: inputClassName,
+    invalidClassName: `${inputClassName} b-form__input_invalid`,
     wrapperClassName: 'b-form__input-wrapper',
     labelClassName: 'b-form__label',
     invalidLabelClassName: 'b-form__label b-form__label_invalid',
+  };
+
+  const textAreaStyles = {
+    ...inputStyles,
+    className: 'b-form__base-input b-form__text',
   };
 
   return (
@@ -43,16 +50,16 @@ const AddArticleForm = ({
       />
 
       <TextArea
-        styles={inputStyles}
+        styles={textAreaStyles}
         error={errors.content}
         placeholder="Content"
         value={content}
         onChange={onContentChange}
       />
 
-      <TagsInputContainer tags={tags} onChange={onTagsChange} />
+      <TagsInputContainer tags={tags} onChange={onTagsChange}  />
 
-      <button type="submit" >Add Article</button >
+      <button className="b-form__submit-button" type="submit" >Add Article</button >
     </form >
   );
 };

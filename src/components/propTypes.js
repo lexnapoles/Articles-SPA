@@ -96,8 +96,6 @@ export const inputPropType = {
 const TagsInputStyles = {
   ...inputStylesPropType,
   buttonClassName: PropTypes.string,
-  tagsClassName: PropTypes.string,
-  tagsContainerClassName: PropTypes.string,
 };
 
 export const tagsInputPropTypes = {
