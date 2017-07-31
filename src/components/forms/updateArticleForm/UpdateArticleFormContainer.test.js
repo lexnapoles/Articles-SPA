@@ -21,7 +21,8 @@ it('validates the article', () => {
     author: '',
     content: '',
     title: '',
-    tags: 'tag1;',
+    tags: [],
+    published: true,
   };
 
   const errors = UpdateArticleFormContainer.validateArticle(article);
@@ -30,26 +31,6 @@ it('validates the article', () => {
     author: 'This field cannot be empty',
     content: 'This field cannot be empty',
     title: 'This field cannot be empty',
-    tags: 'Invalid tags format: tag1;tag2',
-  });
-});
-
-it('creates a submittable article before submitting', () => {
-  const article = {
-    author: 'Author',
-    content: 'Content',
-    title: 'Title',
-    tags: 'tag1;tag2',
-    published: true,
-  };
-
-  const errors = UpdateArticleFormContainer.getSubmittableArticle(article);
-
-  expect(errors).toEqual({
-    author: 'Author',
-    content: 'Content',
-    title: 'Title',
-    tags: ['tag1', 'tag2'],
-    published: true,
+    tags: '',
   });
 });

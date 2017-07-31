@@ -4,8 +4,8 @@ import './app.css';
 import ConnectedArticlesList from '../articlesList/ConnectedArticlesList';
 import ConnectedArticle from '../article/ConnectedArticle';
 import ConnectedHeader from '../header/ConnectedHeader';
-import ConnectedAddFormContainer from '../addArticleForm/ConnectedAddFormContainer';
-import ConnectedUpdateFormContainer from '../updateArticleForm/ConnectedUpdateFormContainer';
+import ConnectedAddFormContainer from '../forms/addArticleForm/ConnectedAddFormContainer';
+import ConnectedUpdateFormContainer from '../forms/updateArticleForm/ConnectedUpdateFormContainer';
 
 const App = () =>
   <BrowserRouter >

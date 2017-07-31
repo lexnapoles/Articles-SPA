@@ -2,9 +2,9 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { pick } from 'lodash/object';
 import UpdateArticleFormContainer from './UpdateArticleFormContainer';
-import { loadArticle, updateArticle } from '../../actions/articles';
-import { getArticleById } from '../../selectors/articles';
-import { hasAllFields } from '../../../utils';
+import { loadArticle, updateArticle } from '../../../actions/articles';
+import { getArticleById } from '../../../selectors/articles';
+import { hasAllFields } from '../../../../utils';
 
 const requiredFields = ['id', 'author', 'content', 'published', 'tags', 'title'];
 

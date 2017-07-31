@@ -6,8 +6,9 @@ it('renders without crashing', () => {
   const article = {
     author: '',
     content: '',
-    tags: '',
+    tags: [],
     title: '',
+    published: true,
   };
 
   const errors = {
@@ -26,6 +27,7 @@ it('renders without crashing', () => {
     onContentChange={placeholderFn}
     onTagsChange={placeholderFn}
     onTitleChange={placeholderFn}
+    onPublishedChange={placeholderFn}
     onSubmit={placeholderFn}
   />);
 });
