@@ -43,7 +43,7 @@ it('updates the value of the input when it changes', () => {
     },
   };
 
-  tagsInput.instance().inputHandler(event);
+  tagsInput.instance().onValueChange(event);
 
   expect(tagsInput.state('value')).toBe(inputValue);
 });

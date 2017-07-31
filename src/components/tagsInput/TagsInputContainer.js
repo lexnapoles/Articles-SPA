@@ -12,7 +12,7 @@ class TagsInputContainer extends Component {
       value: '',
     };
 
-    this.inputHandler = this.inputHandler.bind(this);
+    this.onValueChange = this.onValueChange.bind(this);
     this.onAdd = this.onAdd.bind(this);
     this.onDelete = this.onDelete.bind(this);
   }
@@ -43,15 +43,9 @@ class TagsInputContainer extends Component {
     this.props.onChange(tags);
   }
 
-  deleteLastTag() {
-    const { tags } = this.state;
-
-    const newTags = tags.slice(0, tags.length - 1);
-
-    this.onChange(newTags);
-
+  onValueChange(event) {
     this.setState({
-      tags: newTags,
+      value: event.target.value,
     });
   }
 
@@ -77,22 +71,31 @@ class TagsInputContainer extends Component {
     });
   }
 
-  inputHandler(event) {
+  deleteLastTag() {
+    const { tags } = this.state;
+
+    const newTags = tags.slice(0, tags.length - 1);
+
+    this.onChange(newTags);
+
     this.setState({
-      value: event.target.value,
+      tags: newTags,
     });
   }
 
   render() {
     const { tags, value } = this.state;
 
+    const { tags: propTags, onChange, ...unrelatedProps } = this.props;
+
     return (
       <TagsInput
         tags={tags}
         value={value}
-        onChange={this.inputHandler}
+        onChange={this.onValueChange}
         onAdd={this.onAdd}
         onDelete={this.onDelete}
+        {...unrelatedProps}
       />
     );
   }
