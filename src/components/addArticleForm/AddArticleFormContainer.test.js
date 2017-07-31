@@ -11,7 +11,7 @@ it('validates the article', () => {
     author: '',
     content: '',
     title: '',
-    tags: [''],
+    tags: [],
   };
 
   const errors = AddArticleFormContainer.validateArticle(article);

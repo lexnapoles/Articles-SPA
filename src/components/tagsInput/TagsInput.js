@@ -6,7 +6,7 @@ const TagsInput = ({ tags, value, onChange, onAdd, onDelete }) =>
   <div >
     <label >Tags</label >
     <div >
-      {tags}
+      {tags.map(tag => <div key={tag} >{tag}</div >)}
     </div >
     <Input value={value} placeholder="Article tags" onChange={onChange} />
     <button onClick={onAdd} >Add tag</button >

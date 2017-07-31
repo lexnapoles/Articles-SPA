@@ -63,7 +63,7 @@ const UpdateArticleForm = ({
         onChange={onContentChange}
       />
 
-      <TagsInputContainer onChange={onTagsChange} value={tags} />
+      <TagsInputContainer onChange={onTagsChange} tags={tags} />
 
       <button type="submit" >Update Article</button >
     </form >

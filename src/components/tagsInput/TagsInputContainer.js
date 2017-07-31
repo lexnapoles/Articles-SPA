@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
+import { isEqual } from 'lodash/lang';
 import PropTypes from 'prop-types';
 import TagsInput from './TagsInput';
 
 class TagsInputContainer extends Component {
-
   constructor(props) {
     super(props);
 
@@ -15,6 +15,16 @@ class TagsInputContainer extends Component {
     this.inputHandler = this.inputHandler.bind(this);
     this.onAdd = this.onAdd.bind(this);
     this.onDelete = this.onDelete.bind(this);
+  }
+
+  componentWillReceiveProps({ tags }) {
+    if (isEqual(tags, this.state.tags)) {
+      return;
+    }
+
+    this.setState({
+      tags,
+    });
   }
 
   onAdd(event) {

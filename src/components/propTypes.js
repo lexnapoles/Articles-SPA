@@ -44,7 +44,7 @@ export const articleContainerPropType = {
 const formPropType = {
   author: PropTypes.string.isRequired,
   content: PropTypes.string.isRequired,
-  tags: PropTypes.PropTypes.arrayOf(PropTypes.string).isRequired,
+  tags: PropTypes.arrayOf(PropTypes.string).isRequired,
   title: PropTypes.string.isRequired,
 };
 
@@ -69,7 +69,6 @@ export const articleFormPropType = {
 
 const updateArticlePropTypeShape = PropTypes.shape({
   ...formPropType,
-  tags: PropTypes.arrayOf(PropTypes.string).isRequired,
   published: PropTypes.bool.isRequired,
 });
 
