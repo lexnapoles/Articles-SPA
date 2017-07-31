@@ -76,14 +76,12 @@ class TagsInputContainer extends Component {
   }
 }
 
-TagsInputContainer
-  .propTypes = {
+TagsInputContainer.propTypes = {
   onChange: PropTypes.func.isRequired,
   tags: PropTypes.arrayOf(PropTypes.string),
 };
 
-TagsInputContainer
-  .defaultProps = {
+TagsInputContainer.defaultProps = {
   tags: [],
 };
 
