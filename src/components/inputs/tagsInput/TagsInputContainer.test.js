@@ -101,6 +101,20 @@ it('does not add a tag if it already exists', () => {
   expect(tagsInput.state('tags')).toEqual(tags);
 });
 
+it('does not add empty tags', () => {
+  const tagsInput = getTagsInputContainer();
+  const tags = ['tag1', 'tag2'];
+
+  tagsInput.setState({
+    tags,
+    value: '',
+  });
+
+  tagsInput.instance().onAdd(new MouseEvent('click'));
+
+  expect(tagsInput.state('tags')).toEqual(tags);
+});
+
 it('gives the tags when they change', () => {
   const tags = ['tag1', 'tag2'];
   const receivedTags = [];
@@ -115,3 +129,5 @@ it('gives the tags when they change', () => {
 
   expect(receivedTags).toEqual(tags);
 });
+
+

@@ -51,9 +51,10 @@ class TagsInputContainer extends Component {
 
   addTag() {
     const { tags, value } = this.state;
-    const tagExists = tags.some(tag => tag === value);
+    const tagAlreadyExists = tags.some(tag => tag === value);
+    const isEmptyTag = !value.length;
 
-    if (tagExists) {
+    if (tagAlreadyExists || isEmptyTag) {
       this.setState({
         value: '',
       });
