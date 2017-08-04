@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { trim } from 'lodash/string';
 import PropTypes from 'prop-types';
 import TagsInput from './TagsInput';
 
@@ -47,7 +48,8 @@ class TagsInputContainer extends Component {
     const { value } = this.state;
     const { tags } = this.props;
 
-    const isEmptyTag = !value.length;
+    const trimmedTag = trim(value);
+    const isEmptyTag = !trimmedTag.length;
     const tagAlreadyExists = tags.some(tag => tag === value);
 
     if (isEmptyTag || tagAlreadyExists) {
@@ -56,7 +58,7 @@ class TagsInputContainer extends Component {
 
     this.resetInput();
 
-    const newTags = [...tags, value];
+    const newTags = [...tags, trimmedTag];
     this.onChange(newTags);
   }
 

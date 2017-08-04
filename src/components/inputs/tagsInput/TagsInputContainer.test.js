@@ -37,7 +37,9 @@ it('updates the value of the input when it changes', () => {
 it('passes the tags to the parent when they change', () => {
   let receivedTags;
 
-  const onChange = tags => { receivedTags = tags; };
+  const onChange = tags => {
+    receivedTags = tags;
+  };
   const tags = ['tag1', 'tag2'];
   const tagsInput = getTagsInputContainer({ tags, onChange });
 
@@ -49,7 +51,9 @@ it('passes the tags to the parent when they change', () => {
 it('passes the new tag when one is added', () => {
   let receivedTags = '';
 
-  const onChange = tags => { receivedTags = tags; };
+  const onChange = tags => {
+    receivedTags = tags;
+  };
   const tagsInput = getTagsInputContainer({ onChange });
   const tag = 'Tag1';
 
@@ -77,7 +81,9 @@ it('clears the input when the tag has been added', () => {
 it('passes the new tags with the last tag deleted when the delete button is clicked', () => {
   let receivedTags = '';
 
-  const onChange = tags => { receivedTags = tags; };
+  const onChange = tags => {
+    receivedTags = tags;
+  };
 
   const tagsInput = getTagsInputContainer({
     tags: ['tag1', 'tag2'],
@@ -92,7 +98,9 @@ it('passes the new tags with the last tag deleted when the delete button is clic
 it('does not pass a tag if it already exists', () => {
   let receivedTags;
 
-  const onChange = tags => { receivedTags = tags; };
+  const onChange = tags => {
+    receivedTags = tags;
+  };
 
   const tags = ['tag1', 'tag2'];
   const tagsInput = getTagsInputContainer({ tags, onChange });
@@ -106,18 +114,38 @@ it('does not pass a tag if it already exists', () => {
   expect(receivedTags).toEqual(undefined);
 });
 
-it('does not pass empty tags', () => {
+it('does not pass empty tags, no matter how many whitespaces it has', () => {
   let receivedTags;
 
-  const onChange = tags => { receivedTags = tags; };
+  const onChange = tags => {
+    receivedTags = tags;
+  };
 
   const tagsInput = getTagsInputContainer({ onChange });
 
   tagsInput.setState({
-    value: '',
+    value: '     ',
   });
 
   tagsInput.instance().onAdd(new MouseEvent('click'));
 
   expect(receivedTags).toEqual(undefined);
+});
+
+it('trims the unwanted whitespaces when adding a tag', () => {
+  let receivedTags;
+
+  const onChange = tags => {
+    receivedTags = tags;
+  };
+
+  const tagsInput = getTagsInputContainer({ onChange });
+
+  tagsInput.setState({
+    value: '  tag1  ',
+  });
+
+  tagsInput.instance().onAdd(new MouseEvent('click'));
+
+  expect(receivedTags).toEqual(['tag1']);
 });
