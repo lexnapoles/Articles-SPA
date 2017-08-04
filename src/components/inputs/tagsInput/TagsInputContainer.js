@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { isEqual } from 'lodash/lang';
+import { trim } from 'lodash/string';
 import PropTypes from 'prop-types';
 import TagsInput from './TagsInput';
 
@@ -8,7 +8,6 @@ class TagsInputContainer extends Component {
     super(props);
 
     this.state = {
-      tags: props.tags,
       value: '',
     };
 
@@ -17,20 +16,10 @@ class TagsInputContainer extends Component {
     this.onDelete = this.onDelete.bind(this);
   }
 
-  componentWillReceiveProps({ tags }) {
-    if (isEqual(tags, this.state.tags)) {
-      return;
-    }
-
-    this.setState({
-      tags,
-    });
-  }
-
   onAdd(event) {
     event.preventDefault();
 
-    this.addTag(this.state);
+    this.addTag();
   }
 
   onDelete(event) {
@@ -49,43 +38,41 @@ class TagsInputContainer extends Component {
     });
   }
 
-  addTag() {
-    const { tags, value } = this.state;
-    const tagAlreadyExists = tags.some(tag => tag === value);
-    const isEmptyTag = !value.length;
-
-    if (tagAlreadyExists || isEmptyTag) {
-      this.setState({
-        value: '',
-      });
-
-      return;
-    }
-
-    const newTags = [...tags, value];
-
-    this.onChange(newTags);
-
+  resetInput() {
     this.setState({
-      tags: newTags,
       value: '',
     });
   }
 
+  addTag() {
+    const { value } = this.state;
+    const { tags } = this.props;
+
+    const trimmedTag = trim(value);
+    const isEmptyTag = !trimmedTag.length;
+    const tagAlreadyExists = tags.some(tag => tag === value);
+
+    if (isEmptyTag || tagAlreadyExists) {
+      return;
+    }
+
+    this.resetInput();
+
+    const newTags = [...tags, trimmedTag];
+    this.onChange(newTags);
+  }
+
   deleteLastTag() {
-    const { tags } = this.state;
+    const { tags } = this.props;
 
     const newTags = tags.slice(0, tags.length - 1);
 
     this.onChange(newTags);
-
-    this.setState({
-      tags: newTags,
-    });
   }
 
   render() {
-    const { tags, value } = this.state;
+    const { value } = this.state;
+    const { tags } = this.props;
 
     const { tags: propTags, onChange, ...unrelatedProps } = this.props;
 

@@ -1,5 +1,5 @@
 .b-form {
-    width: 60%;
+    width: 100%;
     display: flex;
     flex-flow: column nowrap;
     background: #F9F9F9;
@@ -21,7 +21,7 @@
 }
 
 .b-form__input {
-    width: 40%;
+    width: 80%;
 }
 
 .b-form__text {
@@ -39,9 +39,8 @@
 }
 
 .b-form__submit-button {
-    width: 30%;
+    width: 50%;
     margin: 2rem auto;
-
 }
 
 .b-form__label_invalid {
@@ -51,4 +50,18 @@
 
 .b-form__published-wrapper {
     margin-top: 2rem;
+}
+
+@media screen and (min-width: 800px) {
+    .b-form  {
+        width: 60%;
+    }
+
+    .b-form__input {
+        width: 50%;
+    }
+
+    .b-form__submit-button {
+        width: 30%;
+    }
 }
