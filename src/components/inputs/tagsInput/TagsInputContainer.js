@@ -48,9 +48,9 @@ class TagsInputContainer extends Component {
     const { value } = this.state;
     const { tags } = this.props;
 
-    const trimmedTag = trim(value);
-    const isEmptyTag = !trimmedTag.length;
-    const tagAlreadyExists = tags.some(tag => tag === value);
+    const newTag = trim(value);
+    const isEmptyTag = !newTag.length;
+    const tagAlreadyExists = tags.some(tag => tag === newTag);
 
     if (isEmptyTag || tagAlreadyExists) {
       return;
@@ -58,7 +58,7 @@ class TagsInputContainer extends Component {
 
     this.resetInput();
 
-    const newTags = [...tags, trimmedTag];
+    const newTags = [...tags, newTag];
     this.onChange(newTags);
   }
 
