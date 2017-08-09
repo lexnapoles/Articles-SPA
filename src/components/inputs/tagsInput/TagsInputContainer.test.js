@@ -40,6 +40,7 @@ it('passes the tags to the parent when they change', () => {
   const onChange = tags => {
     receivedTags = tags;
   };
+
   const tags = ['tag1', 'tag2'];
   const tagsInput = getTagsInputContainer({ tags, onChange });
 
@@ -54,6 +55,7 @@ it('passes the new tag when one is added', () => {
   const onChange = tags => {
     receivedTags = tags;
   };
+
   const tagsInput = getTagsInputContainer({ onChange });
   const tag = 'Tag1';
 
