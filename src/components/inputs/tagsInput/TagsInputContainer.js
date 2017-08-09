@@ -72,9 +72,7 @@ class TagsInputContainer extends Component {
 
   render() {
     const { value } = this.state;
-    const { tags } = this.props;
-
-    const { tags: propTags, onChange, ...unrelatedProps } = this.props;
+    const { tags, onChange, ...unrelatedProps } = this.props;
 
     return (
       <TagsInput
