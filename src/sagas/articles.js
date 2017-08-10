@@ -1,4 +1,5 @@
 import { call, put, takeEvery, select, take, fork } from 'redux-saga/effects';
+import { push } from 'react-router-redux';
 import * as Api from '../api/api';
 import {
   ADD_ARTICLE, DELETE_ARTICLE, FETCH_ARTICLE_BY_ID, FETCH_ARTICLES,
@@ -18,6 +19,8 @@ export const addArticle = function* (article) {
       article: newArticle,
     },
   });
+
+  yield put(push(`/${newArticle.id}`));
 };
 
 export const deleteArticle = function* (id) {

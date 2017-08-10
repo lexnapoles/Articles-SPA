@@ -1,4 +1,5 @@
 import { call, put, takeEvery, fork } from 'redux-saga/effects';
+import { push } from 'react-router-redux';
 import {
   watchFetchArticles, fetchArticles, fetchArticleById, loadArticle, watchLoadArticle,
   deleteArticle, watchDeleteArticle, addArticle, watchAddArticle, updateArticle, watchUpdateArticle,
@@ -203,6 +204,30 @@ describe('addArticle', () => {
     const expectedPut = put({ type: ADD_ARTICLE.SUCCESS, payload: { article: receivedArticle } });
 
     expect(dispatchSuccessAction).toEqual(expectedPut);
+  });
+
+  it('dispatches the PUSH action to redirect to the added article', () => {
+    const iterator = addArticle();
+
+    iterator.next();
+
+    const receivedArticle = {
+      id: '5978b81ed092522a4c85a481',
+      author: 'Author',
+      content: 'New Content',
+      excerpt: 'Excerpt',
+      tags: ['Tag', 'New Tag'],
+      title: 'Title',
+      published: false,
+    };
+
+    iterator.next(receivedArticle);
+
+    const dispatchPushAction = iterator.next().value;
+
+    const expectedPut = put(push(`/${receivedArticle.id}`));
+
+    expect(dispatchPushAction).toEqual(expectedPut);
   });
 });
 
