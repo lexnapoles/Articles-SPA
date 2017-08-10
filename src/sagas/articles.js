@@ -43,6 +43,8 @@ export const updateArticle = function* (article) {
       article: updatedArticle,
     },
   });
+
+  yield put(push(`/${updatedArticle.id}`));
 };
 
 export const fetchArticles = function* () {

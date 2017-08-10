@@ -302,6 +302,30 @@ describe('updateArticle', () => {
 
     expect(dispatchSuccessAction).toEqual(expectedPut);
   });
+
+  it('dispatches the PUSH action to redirect to the updated article', () => {
+    const iterator = updateArticle();
+
+    iterator.next();
+
+    const receivedArticle = {
+      id: '5978b81ed092522a4c85a481',
+      author: 'Author',
+      content: 'New Content',
+      excerpt: 'New Content',
+      tags: ['Tag', 'New Tag'],
+      title: 'Title',
+      published: true,
+    };
+
+    iterator.next(receivedArticle);
+
+    const dispatchPushAction = iterator.next().value;
+
+    const expectedPut = put(push(`/${receivedArticle.id}`));
+
+    expect(dispatchPushAction).toEqual(expectedPut);
+  });
 });
 
 describe('watchUpdateArticle', () => {
