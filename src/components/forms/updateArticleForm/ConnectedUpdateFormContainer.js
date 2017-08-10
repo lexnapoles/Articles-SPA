@@ -19,7 +19,7 @@ const mapStateToProps = (state, { match }) => {
   const article = getArticleById(state, id);
 
   return {
-    article: hasAllFields(article, requiredFields) ? pick(article, requiredFields) : null,
+    article: hasAllFields(article, requiredFields) ? pick(article, requiredFields) : undefined,
     id,
   };
 };

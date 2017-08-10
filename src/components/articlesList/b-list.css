@@ -1,12 +1,14 @@
 .b-list {
     display: flex;
     flex-flow: column wrap;
+    width: 100%;
 }
 
 .b-list__item {
     flex: 1;
     padding: 1rem;
     margin-bottom: .5rem;
+    overflow-wrap: break-word;
     background: #F9F9F9;
     box-shadow: 0 2px 10px #C2C2C2;
     border: 1px solid #C2C2C2;
