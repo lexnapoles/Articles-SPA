@@ -6,7 +6,7 @@ import { tagsInputPropTypes } from '../../propTypes';
 import BaseInput from '../BaseInput';
 import Tags from '../../tags/Tags';
 
-const MAX_TAG_LENGTH = 20;
+const MAX_TAG_LENGTH = 50;
 
 const TagsInput = ({
   title,
