@@ -1,11 +1,15 @@
 .b-article {
+    display:flex;
+    flex-flow: column wrap;
+    width: 100%;
     max-width: 40rem;
-    margin: 0 auto;
 }
 
 .b-article__content {
-    line-height: 1.618;
+    width: 100%;
     margin: 2rem 0;
+    line-height: 1.618;
+    overflow-wrap: break-word;
 }
 
 .b-article__header {
