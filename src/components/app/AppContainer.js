@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import history from '../../constants/history';
 import App from './App';
 
 class AppContainer extends Component {
@@ -9,7 +10,7 @@ class AppContainer extends Component {
   }
 
   render() {
-    return <App />;
+    return <App history={history} />;
   }
 }
 
