@@ -184,15 +184,7 @@ describe('addArticle', () => {
   });
 
   it('dispatches the ADD_ARTICLE_SUCCESS when the article has been added', () => {
-    const article = {
-      author: 'Author',
-      content: 'New Content',
-      excerpt: 'Excerpt',
-      tags: ['Tag', 'New Tag'],
-      title: 'Title',
-    };
-
-    const iterator = addArticle(article);
+    const iterator = addArticle();
 
     iterator.next();
 
@@ -260,16 +252,7 @@ describe('updateArticle', () => {
   });
 
   it('dispatches the UPDATE_ARTICLE_SUCCESS when the article has been updated', () => {
-    const article = {
-      id: '5978b81ed092522a4c85a481',
-      author: 'Author',
-      content: 'New Content',
-      published: true,
-      tags: ['Tag', 'New Tag'],
-      title: 'Title',
-    };
-
-    const iterator = updateArticle(article);
+    const iterator = updateArticle();
 
     iterator.next();
 
