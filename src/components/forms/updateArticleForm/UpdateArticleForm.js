@@ -61,7 +61,7 @@ const UpdateArticleForm = ({
 
       <TagsInputContainer onChange={onTagsChange} tags={tags} styles={inputStyles} />
 
-      <div className="b-form__published-wrapper">
+      <div className="b-form__published-wrapper" >
         <label >Published &nbsp;
           <input type="checkbox" checked={article.published} onChange={onPublishedChange} />
         </label >

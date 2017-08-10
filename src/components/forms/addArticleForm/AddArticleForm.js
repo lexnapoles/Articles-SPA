@@ -57,7 +57,7 @@ const AddArticleForm = ({
         onChange={onContentChange}
       />
 
-      <TagsInputContainer tags={tags} onChange={onTagsChange}  />
+      <TagsInputContainer tags={tags} onChange={onTagsChange} />
 
       <button className="b-form__submit-button" type="submit" >Add Article</button >
     </form >
