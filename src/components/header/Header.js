@@ -1,14 +1,17 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { Switch, Route } from 'react-router-dom';
+import ConnectedHomeHeader from './homeHeader/ConnectedHomeHeader';
+import ConnectedArticleHeader from './articleHeader/ConnectedArticleHeader';
 import './b-header.css';
 
-const Header = ({ onAdd }) =>
-  <header className="b-header" >
-    <button className="b-header__add-article" onClick={onAdd} >Add Article</button >
-  </header >;
+const EmptyHeader = () => <header className="b-header" />;
 
-Header.propTypes = {
-  onAdd: PropTypes.func.isRequired,
-};
+const Header = () =>
+  <Switch >
+    <Route exact path="/" component={ConnectedHomeHeader} />
+    <Route path="/add" component={EmptyHeader} />
+    <Route path="/update" component={EmptyHeader} />
+    <Route path="/:id" component={ConnectedArticleHeader} />
+  </Switch >;
 
 export default Header;
