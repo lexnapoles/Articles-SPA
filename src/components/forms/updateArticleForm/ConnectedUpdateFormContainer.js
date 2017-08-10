@@ -8,18 +8,10 @@ import { hasAllFields } from '../../../../utils';
 
 const requiredFields = ['id', 'author', 'content', 'published', 'tags', 'title'];
 
-const mapDispatchToProps = (dispatch, { history }) => {
-  const onSubmit = article => {
-    dispatch(updateArticle(article));
-
-    history.push(`/${article.id}`);
-  };
-
-  return {
-    onSubmit,
-    loadArticle: id => dispatch(loadArticle(id, requiredFields)),
-  };
-};
+const mapDispatchToProps = dispatch => ({
+  onSubmit: article => dispatch(updateArticle(article)),
+  loadArticle: id => dispatch(loadArticle(id, requiredFields)),
+});
 
 const mapStateToProps = (state, { match }) => {
   const { id } = match.params;

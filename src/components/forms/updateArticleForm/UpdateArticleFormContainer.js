@@ -110,7 +110,7 @@ class UpdateArticleFormContainer extends Component {
     this.setState({
       errors,
     });
-  };
+  }
 
   render() {
     return (
@@ -123,7 +123,8 @@ class UpdateArticleFormContainer extends Component {
         onPublishedChange={event => this.onInputChange('published', event)}
         onTagsChange={this.onTagsChange}
         onSubmit={this.onSubmit}
-      />);
+      />
+    );
   }
 }
 

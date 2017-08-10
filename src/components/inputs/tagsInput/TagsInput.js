@@ -6,6 +6,8 @@ import { tagsInputPropTypes } from '../../propTypes';
 import BaseInput from '../BaseInput';
 import Tags from '../../tags/Tags';
 
+const MAX_TAG_LENGTH = 50;
+
 const TagsInput = ({
   title,
   error,
@@ -20,7 +22,13 @@ const TagsInput = ({
   <BaseInput title={title} styles={styles} error={error} >
     <Tags tags={tags} />
     <div className={styles.inputWrapperClassName} >
-      <Input value={value} placeholder="Article tags" onChange={onChange} {...inputStyles} />
+      <Input
+        value={value}
+        placeholder="Article tags"
+        onChange={onChange}
+        maxLength={MAX_TAG_LENGTH}
+        {...inputStyles}
+      />
       <MdAddIcon className={styles.buttonClassName} onClick={onAdd} />
       <MdDeleteIcon className={styles.buttonClassName} onClick={onDelete} />
     </div >

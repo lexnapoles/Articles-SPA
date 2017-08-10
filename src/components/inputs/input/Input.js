@@ -9,16 +9,18 @@ const Input = ({
   value,
   onChange,
   error,
+  ...restOfAttributes
 }) => {
   const hasError = error.length;
 
   return (
-    <BaseInput title={title} styles={styles} error={error}>
+    <BaseInput title={title} styles={styles} error={error} >
       <input
         className={!hasError ? styles.className : styles.invalidClassName}
         placeholder={placeholder}
         value={value}
         onChange={onChange}
+        {...restOfAttributes}
       />
     </BaseInput >
   );
